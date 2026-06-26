@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>개인정보처리방침 | 오늘 뭐 입지?</title>
+<title>개인정보처리방침 | 데잇(Dait)</title>
 <style>
   :root {
     --bg: #F0EFEB;
@@ -189,13 +189,13 @@
   <div id="ko-content">
     <div class="app-header">
       <h1>개인정보처리방침</h1>
-      <p class="subtitle">오늘 뭐 입지?</p>
-      <span class="effective-date">시행일: 2026년 3월 22일</span>
+      <p class="subtitle">데잇(Dait)</p>
+      <span class="effective-date">시행일: 2026년 6월 20일</span>
     </div>
 
     <div class="section">
       <h2><span class="num">1</span> 총칙</h2>
-      <p>「오늘 뭐 입지?」(이하 "앱")은 이용자의 개인정보를 중요시하며, 「개인정보 보호법」 및 관련 법령을 준수합니다. 본 개인정보처리방침은 앱이 수집하는 개인정보의 항목, 수집 목적, 보유 기간 및 이용자의 권리에 대해 안내합니다.</p>
+      <p>「데잇(Dait)」(이하 "앱")은 이용자의 개인정보를 중요시하며, 「개인정보 보호법」 및 관련 법령을 준수합니다. 본 개인정보처리방침은 앱이 수집하는 개인정보의 항목, 수집 목적, 보유 기간 및 이용자의 권리에 대해 안내합니다.</p>
     </div>
 
     <div class="section">
@@ -220,19 +220,14 @@
             <td>이용자 동의 후 수집</td>
           </tr>
           <tr>
-            <td>사진/카메라 접근</td>
-            <td>OOTD(오늘의 코디) 사진 업로드</td>
-            <td>이용자 동의 후 접근</td>
-          </tr>
-          <tr>
             <td>알림 권한</td>
             <td>날씨 알림 및 코디 추천 알림 발송</td>
             <td>이용자 동의 후 활성화</td>
           </tr>
           <tr>
             <td>캘린더 접근</td>
-            <td>일정 기반 코디 추천 (예: 미팅, 운동 등 일정에 맞는 스타일 제안)</td>
-            <td>이용자 동의 후 접근</td>
+            <td>오늘 일정 확인 및 기기 내 옷차림 추천 참고</td>
+            <td>이용자 동의 후 기기 내에서 접근</td>
           </tr>
           <tr>
             <td>온보딩 정보(성별, 연령대, 선호 스타일)</td>
@@ -240,9 +235,14 @@
             <td>이용자 직접 입력</td>
           </tr>
           <tr>
-            <td>앱 이용 기록(투표, 반응, 조회 이력)</td>
+            <td>앱 이용 기록(좋아요, 저장, 조회 이력)</td>
             <td>추천 알고리즘 개선 및 서비스 품질 향상</td>
             <td>서비스 이용 과정에서 자동 생성</td>
+          </tr>
+          <tr>
+            <td>광고 식별자 및 광고 이용 정보</td>
+            <td>보상형 광고 제공, 광고 성과 측정, 부정 이용 방지</td>
+            <td>Google AdMob SDK를 통해 처리</td>
           </tr>
         </tbody>
       </table>
@@ -255,6 +255,7 @@
         <li>이용자 프로필에 기반한 개인화 콘텐츠 제공</li>
         <li>날씨 변화에 따른 푸시 알림 서비스 제공</li>
         <li>서비스 이용 통계 분석 및 품질 개선</li>
+        <li>보상형 광고 제공 및 광고 성과 측정</li>
         <li>이용자 문의 응대 및 고객 지원</li>
       </ul>
     </div>
@@ -262,11 +263,12 @@
     <div class="section">
       <h2><span class="num">4</span> 개인정보의 보유 및 파기</h2>
       <p class="sub-title">보유 기간</p>
-      <p>앱은 서비스 이용 기간 동안 개인정보를 보유합니다. 앱 삭제 시 디바이스에 저장된 정보(AsyncStorage)는 즉시 삭제됩니다. 서버(Supabase)에 저장된 데이터는 앱 삭제 후 <strong>30일 이내</strong>에 자동으로 파기됩니다.</p>
+      <p>앱은 서비스 이용 기간 동안 개인정보를 보유합니다. 디바이스에 저장된 정보(AsyncStorage)는 앱 삭제 시 함께 삭제됩니다. 서버(Supabase)에 저장된 데이터는 앱 내 <strong>내 데이터 모두 삭제</strong> 기능 또는 이메일 요청을 통해 삭제할 수 있으며, 요청 접수 후 지체 없이 처리합니다.</p>
       <p class="sub-title">파기 방법</p>
       <ul>
         <li>전자적 파일: 복구 불가능한 방법으로 영구 삭제</li>
         <li>위치 정보: 날씨 조회 후 서버에 저장하지 않으며, 디바이스에서만 일시적으로 사용</li>
+        <li>캘린더 정보: 앱 화면 표시와 기기 내 추천 참고에만 사용하며 서버에 저장하지 않음</li>
       </ul>
     </div>
 
@@ -297,6 +299,10 @@
             <td>Open-Meteo / WeatherAPI</td>
             <td>날씨 정보 조회 (위치 좌표 기반)</td>
           </tr>
+          <tr>
+            <td>Google AdMob / Google LLC</td>
+            <td>보상형 광고 제공, 광고 성과 측정, 광고 품질 및 부정 이용 방지</td>
+          </tr>
         </tbody>
       </table>
       <p style="margin-top:12px; font-size:14px; color:var(--text-secondary);">위탁 업체는 위탁 계약 시 개인정보 보호 관련 법규를 준수하도록 관리·감독합니다.</p>
@@ -309,7 +315,6 @@
         <li>개인정보 열람, 수정, 삭제 요청</li>
         <li>개인정보 처리 정지 요청</li>
         <li>위치 정보 및 알림 권한의 철회 (디바이스 설정에서 직접 변경 가능)</li>
-        <li>카메라/갤러리 접근 권한 철회 (디바이스 설정에서 직접 변경 가능)</li>
         <li>캘린더 접근 권한 철회 (디바이스 설정에서 직접 변경 가능)</li>
       </ul>
       <p style="margin-top:12px;">권리 행사는 아래 연락처로 서면, 이메일 등을 통해 요청할 수 있으며, 지체 없이 조치하겠습니다.</p>
@@ -329,7 +334,7 @@
 
     <div class="section">
       <h2><span class="num">9</span> 자동 수집 장치의 설치·운영 및 거부</h2>
-      <p>앱은 웹 쿠키를 사용하지 않습니다. 다만, 서비스 개선을 위해 앱 내 이용 데이터(조회, 투표, 반응 기록 등)를 수집할 수 있으며, 이용자는 앱 삭제를 통해 이를 거부할 수 있습니다.</p>
+      <p>앱은 웹 쿠키를 사용하지 않습니다. 다만, 서비스 개선을 위해 앱 내 이용 데이터(조회, 좋아요, 저장 기록 등)를 수집할 수 있으며, 이용자는 앱 내 데이터 삭제 기능 또는 앱 삭제를 통해 이를 거부할 수 있습니다.</p>
     </div>
 
     <div class="section">
@@ -340,7 +345,7 @@
     <div class="section">
       <h2><span class="num">11</span> 개인정보 보호책임자</h2>
       <div class="contact-box">
-        <p><strong>앱 이름:</strong> 오늘 뭐 입지?</p>
+        <p><strong>앱 이름:</strong> 데잇(Dait)</p>
         <p><strong>개발자:</strong> 온다</p>
         <p><strong>이메일:</strong> <a href="mailto:gh0601060@gmail.com">gh0601060@gmail.com</a></p>
       </div>
@@ -352,20 +357,20 @@
       <p>본 개인정보처리방침은 법령, 정책 또는 보안 기술의 변경에 따라 수정될 수 있으며, 변경 시 앱 내 공지사항 또는 푸시 알림을 통해 사전 고지합니다. 변경 사항은 고지일로부터 7일 후 효력이 발생합니다.</p>
     </div>
 
-    <p class="footer-note">본 개인정보처리방침은 2026년 3월 22일부터 시행됩니다.</p>
+    <p class="footer-note">본 개인정보처리방침은 2026년 6월 20일부터 시행됩니다.</p>
   </div>
 
   <!-- ==================== English ==================== -->
   <div id="en-content" style="display:none;">
     <div class="app-header">
       <h1>Privacy Policy</h1>
-      <p class="subtitle">What Should I Wear Today?</p>
-      <span class="effective-date">Effective Date: March 22, 2026</span>
+      <p class="subtitle">Dait</p>
+      <span class="effective-date">Effective Date: June 20, 2026</span>
     </div>
 
     <div class="section">
       <h2><span class="num">1</span> Introduction</h2>
-      <p>"What Should I Wear Today?" (hereinafter referred to as the "App") values the privacy of its users and complies with applicable privacy laws and regulations, including the Korean Personal Information Protection Act (PIPA). This Privacy Policy describes the types of personal information we collect, the purposes for which we use it, how long we retain it, and the rights available to you regarding your information.</p>
+      <p>"Dait" (hereinafter referred to as the "App") values the privacy of its users and complies with applicable privacy laws and regulations, including the Korean Personal Information Protection Act (PIPA). This Privacy Policy describes the types of personal information we collect, the purposes for which we use it, how long we retain it, and the rights available to you regarding your information.</p>
     </div>
 
     <div class="section">
@@ -390,19 +395,14 @@
             <td>Collected with user consent</td>
           </tr>
           <tr>
-            <td>Camera / Photo Library Access</td>
-            <td>OOTD (Outfit of the Day) photo uploads</td>
-            <td>Accessed with user consent</td>
-          </tr>
-          <tr>
             <td>Push Notification Permission</td>
             <td>Weather alerts and outfit recommendation notifications</td>
             <td>Enabled with user consent</td>
           </tr>
           <tr>
             <td>Calendar Access</td>
-            <td>Schedule-based outfit recommendations (e.g., style suggestions for meetings, workouts, etc.)</td>
-            <td>Accessed with user consent</td>
+            <td>Viewing today's schedule and supporting on-device outfit suggestions</td>
+            <td>Accessed on device with user consent</td>
           </tr>
           <tr>
             <td>Onboarding Data (gender, age group, preferred styles)</td>
@@ -410,9 +410,14 @@
             <td>Directly provided by user</td>
           </tr>
           <tr>
-            <td>Usage Data (votes, reactions, view history)</td>
+            <td>Usage Data (likes, saves, view history)</td>
             <td>Recommendation algorithm improvement and service quality enhancement</td>
             <td>Automatically collected during service use</td>
+          </tr>
+          <tr>
+            <td>Advertising identifiers and ad interaction data</td>
+            <td>Rewarded ad delivery, ad performance measurement, and fraud prevention</td>
+            <td>Processed through the Google AdMob SDK</td>
           </tr>
         </tbody>
       </table>
@@ -425,6 +430,7 @@
         <li>Delivering personalized content based on user profiles</li>
         <li>Sending push notifications for weather changes and outfit suggestions</li>
         <li>Analyzing usage statistics and improving service quality</li>
+        <li>Providing rewarded ads and measuring ad performance</li>
         <li>Responding to user inquiries and providing customer support</li>
       </ul>
     </div>
@@ -432,11 +438,12 @@
     <div class="section">
       <h2><span class="num">4</span> Data Retention and Deletion</h2>
       <p class="sub-title">Retention Period</p>
-      <p>We retain your personal information for the duration of your use of the App. When the App is deleted, locally stored data (AsyncStorage) is immediately removed. Data stored on our servers (Supabase) is automatically deleted within <strong>30 days</strong> of App deletion.</p>
+      <p>We retain your personal information for the duration of your use of the App. Locally stored data (AsyncStorage) is removed when the App is deleted. Data stored on our servers (Supabase) can be deleted through the in-app <strong>Delete All My Data</strong> feature or by email request, and will be processed without undue delay after receipt.</p>
       <p class="sub-title">Deletion Methods</p>
       <ul>
         <li>Electronic files are permanently deleted using methods that prevent recovery.</li>
         <li>Location data is used temporarily on your device for weather queries only and is not stored on our servers.</li>
+        <li>Calendar data is used only to display schedules and support on-device outfit suggestions, and is not stored on our servers.</li>
       </ul>
     </div>
 
@@ -467,6 +474,10 @@
             <td>Open-Meteo / WeatherAPI</td>
             <td>Weather information retrieval based on location coordinates</td>
           </tr>
+          <tr>
+            <td>Google AdMob / Google LLC</td>
+            <td>Rewarded ad delivery, ad performance measurement, ad quality, and fraud prevention</td>
+          </tr>
         </tbody>
       </table>
       <p style="margin-top:12px; font-size:14px; color:var(--text-secondary);">We ensure that our service providers comply with applicable privacy regulations through contractual agreements.</p>
@@ -479,7 +490,6 @@
         <li>Access, correct, or delete your personal information</li>
         <li>Request suspension of personal information processing</li>
         <li>Revoke location and notification permissions (via your device settings)</li>
-        <li>Revoke camera and photo library access (via your device settings)</li>
         <li>Revoke calendar access (via your device settings)</li>
       </ul>
       <p style="margin-top:12px;">To exercise these rights, please contact us using the information provided below. We will process your request without delay.</p>
@@ -499,7 +509,7 @@
 
     <div class="section">
       <h2><span class="num">9</span> Cookies and Tracking</h2>
-      <p>The App does not use web cookies. However, we may collect in-app usage data (views, votes, reactions) for service improvement. You can opt out by uninstalling the App.</p>
+      <p>The App does not use web cookies. However, we may collect in-app usage data (views, likes, saves) for service improvement. You can opt out through the in-app data deletion feature or by uninstalling the App.</p>
     </div>
 
     <div class="section">
@@ -510,7 +520,7 @@
     <div class="section">
       <h2><span class="num">11</span> Contact Us</h2>
       <div class="contact-box">
-        <p><strong>App Name:</strong> What Should I Wear Today? (오늘 뭐 입지?)</p>
+        <p><strong>App Name:</strong> Dait</p>
         <p><strong>Developer:</strong> Onda</p>
         <p><strong>Email:</strong> <a href="mailto:gh0601060@gmail.com">gh0601060@gmail.com</a></p>
       </div>
@@ -522,7 +532,7 @@
       <p>This Privacy Policy may be updated to reflect changes in laws, policies, or security practices. Any changes will be communicated through in-app notices or push notifications. Changes will take effect 7 days after the notification date.</p>
     </div>
 
-    <p class="footer-note">This Privacy Policy is effective as of March 22, 2026.</p>
+    <p class="footer-note">This Privacy Policy is effective as of June 20, 2026.</p>
   </div>
 </div>
 
