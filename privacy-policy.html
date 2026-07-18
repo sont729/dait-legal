@@ -190,7 +190,7 @@
     <div class="app-header">
       <h1>개인정보처리방침</h1>
       <p class="subtitle">데잇(Dait)</p>
-      <span class="effective-date">시행일: 2026년 6월 20일</span>
+      <span class="effective-date">시행일: 2026년 7월 19일</span>
     </div>
 
     <div class="section">
@@ -216,8 +216,8 @@
           </tr>
           <tr>
             <td>위치 정보(위도/경도)</td>
-            <td>현재 위치 기반 날씨 정보 조회</td>
-            <td>이용자 동의 후 수집</td>
+            <td>현재 위치 기반 날씨 정보 조회 및 코디 추천</td>
+            <td>이용자 동의 후 기기에서 수집하여 Cloudflare를 거쳐 WeatherAPI로 전송</td>
           </tr>
           <tr>
             <td>알림 권한</td>
@@ -233,6 +233,21 @@
             <td>온보딩 정보(성별, 연령대, 키, 체형, 선호 스타일)</td>
             <td>맞춤형 코디 추천</td>
             <td>이용자 직접 입력</td>
+          </tr>
+          <tr>
+            <td>만 14세 이상 확인 및 약관 동의 이력(동의 버전·시각)</td>
+            <td>이용 자격 확인 및 동의 이력 관리</td>
+            <td>이용자 확인 및 동의 시 생성</td>
+          </tr>
+          <tr>
+            <td>이용자가 업로드한 사진 및 캡션</td>
+            <td>내 룩 저장, 배틀 등 이용자가 선택한 사진 기능 제공</td>
+            <td>카메라 또는 사진 보관함에서 이용자가 직접 선택</td>
+          </tr>
+          <tr>
+            <td>신고·차단 정보</td>
+            <td>부적절한 콘텐츠 처리 및 이용자 보호</td>
+            <td>신고 또는 차단 기능 이용 시 생성</td>
           </tr>
           <tr>
             <td>앱 이용 기록(좋아요, 저장, 조회 이력)</td>
@@ -254,6 +269,8 @@
         <li>날씨 기반 맞춤형 패션 코디 추천 서비스 제공</li>
         <li>이용자 프로필에 기반한 개인화 콘텐츠 제공</li>
         <li>날씨 변화에 따른 푸시 알림 서비스 제공</li>
+        <li>내 룩 저장, 배틀 등 이용자가 선택한 사진 기능 제공</li>
+        <li>신고·차단 처리 및 안전한 커뮤니티 운영</li>
         <li>서비스 이용 통계 분석 및 품질 개선</li>
         <li>보상형 광고 제공 및 광고 성과 측정</li>
         <li>이용자 문의 응대 및 고객 지원</li>
@@ -267,8 +284,9 @@
       <p class="sub-title">파기 방법</p>
       <ul>
         <li>전자적 파일: 복구 불가능한 방법으로 영구 삭제</li>
-        <li>위치 정보: 날씨 조회 후 서버에 저장하지 않으며, 디바이스에서만 일시적으로 사용</li>
+        <li>위치 정보: 운영자 서버에는 저장하지 않습니다. 마지막 조회 좌표는 기기의 날씨 확인 기능을 위해 일시 저장될 수 있으며 앱 내 데이터 삭제 또는 앱 삭제 시 삭제됩니다.</li>
         <li>캘린더 정보: 앱 화면 표시와 기기 내 추천 참고에만 사용하며 서버에 저장하지 않음</li>
+        <li>이용자 업로드 사진: 앱 내 데이터 삭제 또는 개별 삭제 시 파일 스토리지와 관련 데이터에서 삭제</li>
       </ul>
     </div>
 
@@ -296,8 +314,12 @@
             <td>데이터 저장 및 관리 (클라우드 데이터베이스, 파일 스토리지)</td>
           </tr>
           <tr>
-            <td>Open-Meteo / WeatherAPI</td>
+            <td>WeatherAPI.com (Zoomash Ltd)</td>
             <td>날씨 정보 조회 (위치 좌표 기반)</td>
+          </tr>
+          <tr>
+            <td>Cloudflare, Inc.</td>
+            <td>날씨 요청 중계, 전송 보안 및 비정상 요청 제한</td>
           </tr>
           <tr>
             <td>Google AdMob / Google LLC</td>
@@ -309,7 +331,39 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">7</span> 이용자 및 법정대리인의 권리와 행사 방법</h2>
+      <h2><span class="num">7</span> 개인정보의 국외 이전</h2>
+      <p>날씨 조회와 광고 제공 과정에서 아래와 같이 개인정보가 국외로 이전될 수 있습니다. Supabase 데이터베이스는 대한민국 서울 리전에 저장됩니다.</p>
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>이전받는 자 / 국가</th>
+            <th>이전 항목 및 목적</th>
+            <th>시기·방법 및 보유기간</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>WeatherAPI.com (Zoomash Ltd)<br>영국 및 미국·일본·중국·인도 등 서비스 운영 국가</td>
+            <td>위도·경도 / 날씨 정보 조회</td>
+            <td>날씨 조회 시 암호화 통신으로 전송 / 서비스 제공에 필요한 기간 및 수탁자 정책에 따른 기간</td>
+          </tr>
+          <tr>
+            <td>Cloudflare, Inc.<br>미국 및 Cloudflare 네트워크 운영 국가</td>
+            <td>위도·경도, IP 주소, 요청 정보 / 날씨 요청 중계, 전송 보안 및 비정상 요청 제한</td>
+            <td>날씨 조회 시 암호화 통신으로 전송 / 서비스 제공에 필요한 기간 및 Cloudflare 정책에 따른 기간</td>
+          </tr>
+          <tr>
+            <td>Google LLC<br>미국 및 Google 데이터센터 운영 국가</td>
+            <td>광고 식별자, 기기·네트워크 정보, 광고 상호작용 정보 / 비개인화 보상형 광고, 성과 측정 및 부정 이용 방지</td>
+            <td>광고 SDK 실행 및 광고 요청 시 암호화 통신으로 전송 / Google 정책 또는 이용자 삭제 요청에 따른 기간</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:12px;">이용자는 위치 권한을 거부하거나 광고 개인정보 설정에서 선택을 변경할 수 있습니다. 위치 권한을 거부하면 현재 위치 대신 선택 지역 또는 서울 기준으로 추천하며, 광고 처리를 거부하면 보상형 추가 코디 기능이 제한될 수 있습니다.</p>
+    </div>
+
+    <div class="section">
+      <h2><span class="num">8</span> 이용자 및 법정대리인의 권리와 행사 방법</h2>
       <p>이용자는 언제든지 다음 권리를 행사할 수 있습니다.</p>
       <ul>
         <li>개인정보 열람, 수정, 삭제 요청</li>
@@ -321,11 +375,13 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">8</span> 개인정보의 안전성 확보 조치</h2>
+      <h2><span class="num">9</span> 개인정보의 안전성 확보 조치</h2>
       <p>앱은 개인정보의 안전한 처리를 위해 다음 조치를 시행합니다.</p>
       <ul>
         <li>데이터 전송 시 HTTPS(TLS) 암호화 적용</li>
         <li>Supabase Row Level Security(RLS) 정책을 통한 데이터 접근 제어</li>
+        <li>내 룩 사진은 비공개 파일 저장소와 만료되는 서명 URL을 통해 본인에게만 제공</li>
+        <li>배틀 사진은 인증된 앱 이용자에게만 만료되는 서명 URL로 제공</li>
         <li>디바이스 ID 기반 인증으로 최소한의 개인정보만 수집</li>
         <li>위치 정보는 서버에 저장하지 않고 날씨 조회 후 즉시 폐기</li>
         <li>정기적인 보안 점검 및 취약점 모니터링</li>
@@ -333,17 +389,17 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">9</span> 자동 수집 장치의 설치·운영 및 거부</h2>
+      <h2><span class="num">10</span> 자동 수집 장치의 설치·운영 및 거부</h2>
       <p>앱은 웹 쿠키를 사용하지 않습니다. 다만, 서비스 개선을 위해 앱 내 이용 데이터(조회, 좋아요, 저장 기록 등)를 수집할 수 있으며, 이용자는 앱 내 데이터 삭제 기능 또는 앱 삭제를 통해 이를 거부할 수 있습니다.</p>
     </div>
 
     <div class="section">
-      <h2><span class="num">10</span> 만 14세 미만 아동의 개인정보</h2>
-      <p>앱은 만 14세 미만 아동의 개인정보를 수집하지 않습니다. 만 14세 미만의 이용자가 개인정보를 제공한 사실을 인지한 경우, 해당 정보를 즉시 삭제합니다.</p>
+      <h2><span class="num">11</span> 만 14세 미만 아동의 개인정보</h2>
+      <p>앱은 만 14세 이상 이용자를 대상으로 하며 온보딩에서 연령 확인을 받습니다. 만 14세 미만 이용자의 개인정보가 수집된 사실을 인지한 경우 해당 정보를 지체 없이 삭제합니다.</p>
     </div>
 
     <div class="section">
-      <h2><span class="num">11</span> 개인정보 보호책임자</h2>
+      <h2><span class="num">12</span> 개인정보 보호책임자</h2>
       <div class="contact-box">
         <p><strong>앱 이름:</strong> 데잇(Dait)</p>
         <p><strong>개발자:</strong> 온다</p>
@@ -353,11 +409,11 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">12</span> 개인정보처리방침 변경</h2>
+      <h2><span class="num">13</span> 개인정보처리방침 변경</h2>
       <p>본 개인정보처리방침은 법령, 정책 또는 보안 기술의 변경에 따라 수정될 수 있으며, 변경 시 앱 내 공지사항 또는 푸시 알림을 통해 사전 고지합니다. 변경 사항은 고지일로부터 7일 후 효력이 발생합니다.</p>
     </div>
 
-    <p class="footer-note">본 개인정보처리방침은 2026년 6월 20일부터 시행됩니다.</p>
+    <p class="footer-note">본 개인정보처리방침은 2026년 7월 19일부터 시행됩니다.</p>
   </div>
 
   <!-- ==================== English ==================== -->
@@ -365,7 +421,7 @@
     <div class="app-header">
       <h1>Privacy Policy</h1>
       <p class="subtitle">Dait</p>
-      <span class="effective-date">Effective Date: June 20, 2026</span>
+      <span class="effective-date">Effective Date: July 19, 2026</span>
     </div>
 
     <div class="section">
@@ -392,7 +448,7 @@
           <tr>
             <td>Location Data (latitude/longitude)</td>
             <td>Weather-based outfit recommendations</td>
-            <td>Collected with user consent</td>
+            <td>Collected with user consent and sent through Cloudflare to WeatherAPI</td>
           </tr>
           <tr>
             <td>Push Notification Permission</td>
@@ -408,6 +464,21 @@
             <td>Onboarding Data (gender, age group, height, body type, preferred styles)</td>
             <td>Personalized outfit recommendations</td>
             <td>Directly provided by user</td>
+          </tr>
+          <tr>
+            <td>Age 14+ confirmation and consent records (version and timestamp)</td>
+            <td>Eligibility confirmation and consent record management</td>
+            <td>Generated when the user confirms and agrees</td>
+          </tr>
+          <tr>
+            <td>User-uploaded photos and captions</td>
+            <td>Providing My Look, battles, and other photo features selected by the user</td>
+            <td>Directly selected by the user from the camera or photo library</td>
+          </tr>
+          <tr>
+            <td>Report and block records</td>
+            <td>Handling inappropriate content and protecting users</td>
+            <td>Generated when report or block features are used</td>
           </tr>
           <tr>
             <td>Usage Data (likes, saves, view history)</td>
@@ -429,6 +500,8 @@
         <li>Providing weather-based personalized outfit recommendations</li>
         <li>Delivering personalized content based on user profiles</li>
         <li>Sending push notifications for weather changes and outfit suggestions</li>
+        <li>Providing My Look, battles, and other photo features selected by the user</li>
+        <li>Handling reports and blocks and maintaining a safe community</li>
         <li>Analyzing usage statistics and improving service quality</li>
         <li>Providing rewarded ads and measuring ad performance</li>
         <li>Responding to user inquiries and providing customer support</li>
@@ -442,8 +515,9 @@
       <p class="sub-title">Deletion Methods</p>
       <ul>
         <li>Electronic files are permanently deleted using methods that prevent recovery.</li>
-        <li>Location data is used temporarily on your device for weather queries only and is not stored on our servers.</li>
+        <li>Location data is not stored on Dait's servers. The last queried coordinates may be stored temporarily on the device for weather checks and are removed through in-app data deletion or app deletion.</li>
         <li>Calendar data is used only to display schedules and support on-device outfit suggestions, and is not stored on our servers.</li>
+        <li>User-uploaded photos are removed from file storage and related records through individual deletion or the in-app data deletion feature.</li>
       </ul>
     </div>
 
@@ -471,8 +545,12 @@
             <td>Cloud database and file storage services</td>
           </tr>
           <tr>
-            <td>Open-Meteo / WeatherAPI</td>
+            <td>WeatherAPI.com (Zoomash Ltd)</td>
             <td>Weather information retrieval based on location coordinates</td>
+          </tr>
+          <tr>
+            <td>Cloudflare, Inc.</td>
+            <td>Weather request relay, transport security, and abuse rate limiting</td>
           </tr>
           <tr>
             <td>Google AdMob / Google LLC</td>
@@ -484,7 +562,39 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">7</span> Your Rights</h2>
+      <h2><span class="num">7</span> International Data Transfers</h2>
+      <p>Personal information may be transferred internationally when weather and advertising services are used. The Supabase database is hosted in the Seoul, Republic of Korea region.</p>
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Recipient / Countries</th>
+            <th>Data and Purpose</th>
+            <th>Timing, Method, and Retention</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>WeatherAPI.com (Zoomash Ltd)<br>United Kingdom and service operation countries including the U.S., Japan, China, and India</td>
+            <td>Latitude and longitude / weather retrieval</td>
+            <td>Encrypted transfer at each weather request / as required to provide the service and under the provider's retention policy</td>
+          </tr>
+          <tr>
+            <td>Cloudflare, Inc.<br>United States and countries where Cloudflare operates its network</td>
+            <td>Latitude, longitude, IP address, and request metadata / weather request relay, transport security, and abuse rate limiting</td>
+            <td>Encrypted transfer at each weather request / as required to provide the service and under Cloudflare's applicable retention policies</td>
+          </tr>
+          <tr>
+            <td>Google LLC<br>United States and countries where Google operates data centers</td>
+            <td>Advertising identifier, device and network information, ad interactions / non-personalized rewarded ads, measurement, and fraud prevention</td>
+            <td>Encrypted transfer when the ad SDK runs or requests an ad / under Google's retention policy or until a valid deletion request</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:12px;">You may deny location permission or change available choices under Advertising Privacy Settings. If location is denied, recommendations use a selected city or Seoul; if advertising processing is denied, rewarded additional outfits may be unavailable.</p>
+    </div>
+
+    <div class="section">
+      <h2><span class="num">8</span> Your Rights</h2>
       <p>You have the right to:</p>
       <ul>
         <li>Access, correct, or delete your personal information</li>
@@ -496,11 +606,13 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">8</span> Data Security</h2>
+      <h2><span class="num">9</span> Data Security</h2>
       <p>We implement the following measures to ensure the security of your personal information:</p>
       <ul>
         <li>HTTPS (TLS) encryption for all data transmissions</li>
         <li>Supabase Row Level Security (RLS) policies for data access control</li>
+        <li>My Look photos are delivered only to their owner from private file storage using expiring signed URLs</li>
+        <li>Battle photos are delivered only to authenticated app users using expiring signed URLs</li>
         <li>Minimal data collection through device ID-based authentication (no account registration required)</li>
         <li>Location data is not stored on servers and is discarded immediately after weather retrieval</li>
         <li>Regular security audits and vulnerability monitoring</li>
@@ -508,17 +620,17 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">9</span> Cookies and Tracking</h2>
+      <h2><span class="num">10</span> Cookies and Tracking</h2>
       <p>The App does not use web cookies. However, we may collect in-app usage data (views, likes, saves) for service improvement. You can opt out through the in-app data deletion feature or by uninstalling the App.</p>
     </div>
 
     <div class="section">
-      <h2><span class="num">10</span> Children's Privacy</h2>
-      <p>The App does not knowingly collect personal information from children under the age of 14. If we become aware that a child under 14 has provided personal information, we will promptly delete such information.</p>
+      <h2><span class="num">11</span> Children's Privacy</h2>
+      <p>The App is intended for users aged 14 or older and asks users to confirm eligibility during onboarding. If we become aware that a child under 14 has provided personal information, we will delete it without undue delay.</p>
     </div>
 
     <div class="section">
-      <h2><span class="num">11</span> Contact Us</h2>
+      <h2><span class="num">12</span> Contact Us</h2>
       <div class="contact-box">
         <p><strong>App Name:</strong> Dait</p>
         <p><strong>Developer:</strong> Onda</p>
@@ -528,11 +640,11 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">12</span> Changes to This Policy</h2>
+      <h2><span class="num">13</span> Changes to This Policy</h2>
       <p>This Privacy Policy may be updated to reflect changes in laws, policies, or security practices. Any changes will be communicated through in-app notices or push notifications. Changes will take effect 7 days after the notification date.</p>
     </div>
 
-    <p class="footer-note">This Privacy Policy is effective as of June 20, 2026.</p>
+    <p class="footer-note">This Privacy Policy is effective as of July 19, 2026.</p>
   </div>
 </div>
 
