@@ -190,7 +190,7 @@
     <div class="app-header">
       <h1>개인정보처리방침</h1>
       <p class="subtitle">데잇(Dait)</p>
-      <span class="effective-date">시행일: 2026년 7월 19일</span>
+      <span class="effective-date">시행일: 2026년 8월 3일</span>
     </div>
 
     <div class="section">
@@ -210,14 +210,24 @@
         </thead>
         <tbody>
           <tr>
-            <td>디바이스 식별자(Device ID)</td>
+            <td>익명 인증 식별자(UUID)</td>
             <td>이용자 식별 및 개인화 설정 유지</td>
-            <td>앱 최초 실행 시 자동 생성</td>
+            <td>앱 최초 실행 시 Supabase Auth가 익명 발급</td>
+          </tr>
+          <tr>
+            <td>선택 로그인 정보(이메일 주소, 표시 이름, Google 또는 Apple 계정 식별자)</td>
+            <td>회원 계정 생성·로그인, 저장 데이터 동기화 및 계정 복구</td>
+            <td>이용자가 Google 또는 Apple 로그인을 선택할 때 해당 제공자로부터 수신</td>
           </tr>
           <tr>
             <td>위치 정보(위도/경도)</td>
             <td>현재 위치 기반 날씨 정보 조회 및 코디 추천</td>
             <td>이용자 동의 후 기기에서 수집하여 Cloudflare를 거쳐 WeatherAPI로 전송</td>
+          </tr>
+          <tr>
+            <td>위치 이용 사실 확인자료(익명 UUID, 이용 일시·목적·경로·방법·처리자, 좌표 제외)</td>
+            <td>위치정보법상 이용 사실 기록·보존 및 이용자 권리 보장</td>
+            <td>현재 위치를 날씨 조회에 이용할 때 자동 생성</td>
           </tr>
           <tr>
             <td>알림 권한</td>
@@ -230,7 +240,7 @@
             <td>이용자 동의 후 기기 내에서 접근</td>
           </tr>
           <tr>
-            <td>온보딩 정보(성별, 연령대, 키, 체형, 선호 스타일)</td>
+            <td>온보딩 정보(성별, 연령대, 선택 입력한 생일 월·일, 키, 체형, 선호 스타일) 및 기기에 저장한 지역(기본 최대 2개, Plus 최대 5개)</td>
             <td>맞춤형 코디 추천</td>
             <td>이용자 직접 입력</td>
           </tr>
@@ -264,6 +274,16 @@
             <td>보상형 광고 제공, 광고 성과 측정, 부정 이용 방지</td>
             <td>Google AdMob SDK를 통해 처리</td>
           </tr>
+          <tr>
+            <td>구독 식별 정보(익명 앱 사용자 UUID, 상품 ID, 구매·복원 상태, 만료일, 갱신 여부)</td>
+            <td>Dait Plus 구매 확인, 권한 제공, 구매 복원 및 부정 이용 방지</td>
+            <td>이용자가 앱 마켓에서 구독을 구매·복원할 때 RevenueCat SDK와 각 앱 마켓을 통해 처리</td>
+          </tr>
+          <tr>
+            <td>최소 오류 진단정보(오류 메시지를 제외한 오류 종류, 해시 식별값, 앱 버전, 운영체제)</td>
+            <td>앱 실행 오류 탐지 및 안정성 개선</td>
+            <td>앱에 치명적인 실행 오류가 발생할 때 자동 생성하며 사진·위치·이메일·이용자 입력 내용은 수집하지 않음</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -272,12 +292,14 @@
       <h2><span class="num">3</span> 개인정보의 수집 및 이용 목적</h2>
       <ul>
         <li>날씨 기반 맞춤형 패션 코디 추천 서비스 제공</li>
+        <li>선택 로그인 계정 생성·인증, 저장 내역 동기화 및 계정 복구</li>
         <li>이용자 프로필에 기반한 개인화 콘텐츠 제공</li>
         <li>날씨 변화에 따른 푸시 알림 서비스 제공</li>
         <li>이용자가 선택한 저장 코디를 아이폰 배경화면으로 저장하거나 Apple Watch 사진 워치페이스와 동기화</li>
         <li>내 룩 저장, 배틀 등 이용자가 선택한 사진 기능 제공</li>
         <li>신고·차단 처리 및 안전한 커뮤니티 운영</li>
         <li>서비스 이용 통계 분석 및 품질 개선</li>
+        <li>개인 내용을 포함하지 않는 최소 오류 진단을 통한 앱 안정성 개선</li>
         <li>보상형 광고 제공 및 광고 성과 측정</li>
         <li>이용자 문의 응대 및 고객 지원</li>
       </ul>
@@ -286,11 +308,12 @@
     <div class="section">
       <h2><span class="num">4</span> 개인정보의 보유 및 파기</h2>
       <p class="sub-title">보유 기간</p>
-      <p>앱은 서비스 이용 기간 동안 개인정보를 보유합니다. 디바이스에 저장된 정보(AsyncStorage)는 앱 삭제 시 함께 삭제됩니다. 서버(Supabase)에 저장된 데이터는 앱 내 <strong>내 데이터 모두 삭제</strong> 기능 또는 이메일 요청을 통해 삭제할 수 있으며, 요청 접수 후 지체 없이 처리합니다.</p>
+      <p>앱은 서비스 이용 기간 동안 개인정보를 보유합니다. 디바이스에 저장된 정보(AsyncStorage)는 앱 삭제 시 함께 삭제됩니다. 비로그인 이용자의 서버 데이터는 익명 식별자(UUID) 기준으로 저장되며, 로그인 이용자는 선택한 제공자가 전달한 이메일·표시 이름과 계정 식별자가 Supabase Auth 계정에 연결됩니다. 앱 내 <strong>내 데이터 모두 삭제</strong> 기능 또는 이메일 요청을 통해 계정과 관련 데이터를 삭제할 수 있고, 요청 접수 후 지체 없이 파기합니다. 오류 진단정보는 계정별 하루 최대 5건만 기록하고 30일 이내 파기합니다. 다만, 「위치정보의 보호 및 이용 등에 관한 법률」 제16조제2항에 따른 위치 이용 사실 확인자료는 좌표 없이 6개월 동안 보관한 뒤 파기합니다.</p>
       <p class="sub-title">파기 방법</p>
       <ul>
         <li>전자적 파일: 복구 불가능한 방법으로 영구 삭제</li>
-        <li>위치 정보: 운영자 서버에는 저장하지 않습니다. 마지막 조회 좌표는 기기의 날씨 확인 기능을 위해 일시 저장될 수 있으며 앱 내 데이터 삭제 또는 앱 삭제 시 삭제됩니다.</li>
+        <li>정확한 위치 좌표: 운영자 데이터베이스와 중계 서버 캐시에 저장하지 않습니다. 날씨 알림을 켠 경우에만 마지막 좌표가 기기에 저장되며, 알림 해제·앱 내 데이터 삭제·앱 삭제 시 삭제됩니다.</li>
+        <li>위치 이용 사실 확인자료: 좌표를 제외한 익명 UUID, 이용 일시·목적·경로·방법·처리자만 6개월 보관 후 파기</li>
         <li>캘린더 정보: 앱 화면 표시와 기기 내 추천 참고에만 사용하며 서버에 저장하지 않음</li>
         <li>Dait Wallpapers·Dait Watch Face 사진: 기기 사진 보관함에 저장하며 Watch Face 앨범은 최신 또는 고정 사진 한 장을 유지하도록 교체함. 이용자가 사진 접근을 해제하거나 해당 사진·앨범을 직접 삭제할 수 있음</li>
         <li>이용자 업로드 사진: 앱 내 데이터 삭제 또는 개별 삭제 시 파일 스토리지와 관련 데이터에서 삭제</li>
@@ -318,7 +341,7 @@
         <tbody>
           <tr>
             <td>Supabase Inc.</td>
-            <td>데이터 저장 및 관리 (클라우드 데이터베이스, 파일 스토리지)</td>
+            <td>익명·회원 인증, 데이터 저장 및 관리 (서울 리전 클라우드 데이터베이스, 비공개 이용자 파일 스토리지, 지원·보안 운영)</td>
           </tr>
           <tr>
             <td>WeatherAPI.com (Zoomash Ltd)</td>
@@ -326,11 +349,19 @@
           </tr>
           <tr>
             <td>Cloudflare, Inc.</td>
-            <td>날씨 요청 중계, 전송 보안 및 비정상 요청 제한</td>
+            <td>날씨 요청 중계, 전송 보안, 비정상 요청 제한 및 공개 코디 이미지 전송(R2)</td>
           </tr>
           <tr>
             <td>Google AdMob / Google LLC</td>
-            <td>보상형 광고 제공, 광고 성과 측정, 광고 품질 및 부정 이용 방지</td>
+            <td>선택한 Google 계정 인증, 보상형 광고 제공, 광고 성과 측정, 광고 품질 및 부정 이용 방지</td>
+          </tr>
+          <tr>
+            <td>Apple Inc.</td>
+            <td>이용자가 선택한 Apple 계정 인증</td>
+          </tr>
+          <tr>
+            <td>RevenueCat, Inc.</td>
+            <td>인앱 구독 구매 확인, 구독 권한 동기화, 구매 복원 및 구독 상태 관리</td>
           </tr>
         </tbody>
       </table>
@@ -339,7 +370,7 @@
 
     <div class="section">
       <h2><span class="num">7</span> 개인정보의 국외 이전</h2>
-      <p>날씨 조회와 광고 제공 과정에서 아래와 같이 개인정보가 국외로 이전될 수 있습니다. Supabase 데이터베이스는 대한민국 서울 리전에 저장됩니다.</p>
+      <p>Supabase 프로젝트의 주 데이터베이스는 대시보드에서 확인한 대한민국 서울(ap-northeast-2) 리전에 저장됩니다. 다만 서비스 지원·보안 운영, 날씨 조회, 이미지 전송 및 광고 제공 과정에서 아래와 같이 국외 처리가 발생할 수 있습니다. 이전 근거는 서비스 계약 이행에 필요한 처리위탁·보관에 관한 「개인정보 보호법」 제28조의8제1항제3호이며, 별도 동의가 필요한 경우 앱의 동의 관리 화면에서 동의를 받습니다.</p>
       <table class="info-table">
         <thead>
           <tr>
@@ -350,23 +381,38 @@
         </thead>
         <tbody>
           <tr>
-            <td>WeatherAPI.com (Zoomash Ltd)<br>영국 및 미국·일본·중국·인도 등 서비스 운영 국가</td>
+            <td>Supabase Inc. 및 공개된 재수탁자<br>미국 및 서비스·지원 시설 운영 국가(주 데이터 저장: 대한민국 서울)<br>연락처: support@supabase.com</td>
+            <td>익명 또는 회원 UUID, 선택 로그인 이메일·표시 이름, 프로필, 이용·동의·위치 이용 사실 기록, 이용자 업로드 정보 / 데이터베이스·인증·지원·보안 운영</td>
+            <td>서비스 이용 및 지원·보안 처리 시 암호화 통신 / 서비스 이용 기간 또는 각 항목의 고지된 보유기간</td>
+          </tr>
+          <tr>
+            <td>WeatherAPI.com (Zoomash Ltd)<br>영국 및 미국·일본·중국·인도 등 서비스 운영 국가<br>연락처: www.weatherapi.com (문의 양식)</td>
             <td>위도·경도 / 날씨 정보 조회</td>
             <td>날씨 조회 시 암호화 통신으로 전송 / 서비스 제공에 필요한 기간 및 수탁자 정책에 따른 기간</td>
           </tr>
           <tr>
-            <td>Cloudflare, Inc.<br>미국 및 Cloudflare 네트워크 운영 국가</td>
-            <td>위도·경도, IP 주소, 요청 정보 / 날씨 요청 중계, 전송 보안 및 비정상 요청 제한</td>
-            <td>날씨 조회 시 암호화 통신으로 전송 / 서비스 제공에 필요한 기간 및 Cloudflare 정책에 따른 기간</td>
+            <td>Cloudflare, Inc.<br>미국 및 Cloudflare 네트워크 운영 국가<br>연락처: privacyquestions@cloudflare.com</td>
+            <td>위도·경도, IP 주소, 요청 정보 / 날씨 요청 중계, 전송 보안, 비정상 요청 제한 및 공개 코디 이미지 전송</td>
+            <td>날씨 조회 또는 이미지 요청 시 암호화 통신으로 전송 / 서비스 제공에 필요한 기간 및 Cloudflare 정책에 따른 기간</td>
           </tr>
           <tr>
-            <td>Google LLC<br>미국 및 Google 데이터센터 운영 국가</td>
-            <td>광고 식별자, 기기·네트워크 정보, 광고 상호작용 정보 / 비개인화 보상형 광고, 성과 측정 및 부정 이용 방지</td>
-            <td>광고 SDK 실행 및 광고 요청 시 암호화 통신으로 전송 / Google 정책 또는 이용자 삭제 요청에 따른 기간</td>
+            <td>Google LLC<br>미국 및 Google 데이터센터 운영 국가<br>연락처: policies.google.com/privacy</td>
+            <td>로그인 선택 시 이메일·표시 이름·Google 계정 식별자, 광고 이용 시 광고 식별자·기기·네트워크·상호작용 정보 / 계정 인증, 비개인화 보상형 광고, 성과 측정 및 부정 이용 방지</td>
+            <td>Google 로그인 또는 광고 요청 시 암호화 통신으로 전송 / Google 정책 또는 이용자 삭제 요청에 따른 기간</td>
+          </tr>
+          <tr>
+            <td>Apple Inc.<br>미국 및 Apple 서비스 운영 국가<br>연락처: apple.com/legal/privacy/contact</td>
+            <td>로그인 선택 시 이메일(가리기 선택 시 릴레이 주소), 표시 이름, Apple 계정 식별자 / 계정 인증</td>
+            <td>Apple 로그인 시 암호화 통신으로 전송 / Apple 정책 또는 이용자 삭제 요청에 따른 기간</td>
+          </tr>
+          <tr>
+            <td>RevenueCat, Inc.<br>미국 및 공개된 재수탁자 운영 국가<br>연락처: support@revenuecat.com</td>
+            <td>익명 앱 사용자 UUID, 상품 ID, 구매·복원 상태, 만료일, 갱신 여부 / 구독 확인, 권한 제공, 구매 복원 및 부정 이용 방지</td>
+            <td>구독 구매·복원·상태 확인 시 암호화 통신으로 전송 / 구독 및 법정 보관 의무 종료 후 RevenueCat 정책 또는 유효한 삭제 요청에 따른 기간</td>
           </tr>
         </tbody>
       </table>
-      <p style="margin-top:12px;">이용자는 위치 권한을 거부하거나 광고 개인정보 설정에서 선택을 변경할 수 있습니다. 위치 권한을 거부하면 현재 위치 대신 선택 지역 또는 서울 기준으로 추천하며, 광고 처리를 거부하면 보상형 추가 코디 기능이 제한될 수 있습니다.</p>
+      <p style="margin-top:12px;">이용자는 위치 권한을 거부하거나 광고 개인정보 설정에서 선택을 변경할 수 있습니다. 위치 권한을 거부하면 현재 위치 대신 선택 지역 또는 서울 기준으로 추천하며, 광고 처리를 거부하면 보상형 추가 코디 기능이 제한될 수 있습니다. 서비스 제공에 필수적인 국외 처리위탁·보관을 거부하려면 앱 내 데이터 삭제 후 이용을 중단할 수 있습니다.</p>
     </div>
 
     <div class="section">
@@ -389,15 +435,17 @@
         <li>Supabase Row Level Security(RLS) 정책을 통한 데이터 접근 제어</li>
         <li>내 룩 사진은 비공개 파일 저장소와 만료되는 서명 URL을 통해 본인에게만 제공</li>
         <li>배틀 사진은 인증된 앱 이용자에게만 만료되는 서명 URL로 제공</li>
-        <li>디바이스 ID 기반 인증으로 최소한의 개인정보만 수집</li>
-        <li>위치 정보는 서버에 저장하지 않고 날씨 조회 후 즉시 폐기</li>
+        <li>비로그인 이용자는 Supabase Auth 익명 UUID를 사용하고, 로그인은 이용자가 선택한 Google·Apple 계정 정보만 최소 수집</li>
+        <li>정확한 위치 좌표는 서버에 저장하지 않고 날씨 조회 후 즉시 폐기</li>
+        <li>좌표 없는 위치 이용 사실 확인자료를 자동 기록하고 6개월 보관 후 파기</li>
         <li>정기적인 보안 점검 및 취약점 모니터링</li>
       </ul>
     </div>
 
     <div class="section">
-      <h2><span class="num">10</span> 자동 수집 장치의 설치·운영 및 거부</h2>
+      <h2><span class="num">10</span> 자동 수집 장치·행태정보의 설치·운영 및 거부</h2>
       <p>앱은 웹 쿠키를 사용하지 않습니다. 다만, 서비스 개선을 위해 앱 내 이용 데이터(조회, 좋아요, 저장 기록 등)를 수집할 수 있으며, 이용자는 앱 내 데이터 삭제 기능 또는 앱 삭제를 통해 이를 거부할 수 있습니다.</p>
+      <p style="margin-top:12px;">앱은 맞춤형 광고를 위한 행태정보를 수집·이용하지 않으며, Google AdMob을 통해 <strong>비개인화 광고</strong>만 표시하도록 설정하고 있습니다. 광고 게재 과정에서 광고 식별자와 기기 정보가 광고 제공, 노출 빈도 제한, 부정 이용 방지 목적으로 처리될 수 있습니다. 이용자는 기기 설정(iOS: 설정 › 개인정보 보호 및 보안 › 추적, Android: 설정 › Google › 광고)에서 광고 식별자 사용을 제한하거나 재설정할 수 있습니다. 보상형 광고를 시청하지 않아도 기본 서비스 이용에는 제한이 없으며, 추가 코디 보기 기능만 제한될 수 있습니다.</p>
     </div>
 
     <div class="section">
@@ -409,7 +457,7 @@
       <h2><span class="num">12</span> 개인정보 보호책임자</h2>
       <div class="contact-box">
         <p><strong>앱 이름:</strong> 데잇(Dait)</p>
-        <p><strong>개발자:</strong> 온다</p>
+        <p><strong>개인정보 보호책임자(개발자):</strong> 손태섭</p>
         <p><strong>이메일:</strong> <a href="mailto:gh0601060@gmail.com">gh0601060@gmail.com</a></p>
       </div>
       <p style="margin-top:12px;">개인정보 관련 문의사항은 위 이메일로 연락해 주시기 바랍니다. 접수된 문의는 <strong>영업일 기준 3일 이내</strong>에 회신드리겠습니다.</p>
@@ -420,7 +468,7 @@
       <p>본 개인정보처리방침은 법령, 정책 또는 보안 기술의 변경에 따라 수정될 수 있으며, 변경 시 앱 내 공지사항 또는 푸시 알림을 통해 사전 고지합니다. 변경 사항은 고지일로부터 7일 후 효력이 발생합니다.</p>
     </div>
 
-    <p class="footer-note">본 개인정보처리방침은 2026년 7월 19일부터 시행됩니다.</p>
+    <p class="footer-note">본 개인정보처리방침은 2026년 8월 1일부터 시행됩니다.</p>
   </div>
 
   <!-- ==================== English ==================== -->
@@ -428,7 +476,7 @@
     <div class="app-header">
       <h1>Privacy Policy</h1>
       <p class="subtitle">Dait</p>
-      <span class="effective-date">Effective Date: July 19, 2026</span>
+      <span class="effective-date">Effective Date: August 3, 2026</span>
     </div>
 
     <div class="section">
@@ -448,14 +496,24 @@
         </thead>
         <tbody>
           <tr>
-            <td>Device Identifier (Device ID)</td>
+            <td>Anonymous authentication identifier (UUID)</td>
             <td>User identification and personalization settings</td>
-            <td>Automatically generated on first launch</td>
+            <td>Issued anonymously by Supabase Auth on first launch</td>
+          </tr>
+          <tr>
+            <td>Optional sign-in information (email address, display name, and Google or Apple account identifier)</td>
+            <td>Account creation and authentication, saved-data sync, and account recovery</td>
+            <td>Received from Google or Apple when the user chooses to sign in</td>
           </tr>
           <tr>
             <td>Location Data (latitude/longitude)</td>
             <td>Weather-based outfit recommendations</td>
             <td>Collected with user consent and sent through Cloudflare to WeatherAPI</td>
+          </tr>
+          <tr>
+            <td>Location-use confirmation record (anonymous UUID, time, purpose, path, method, and processors; no coordinates)</td>
+            <td>Statutory location-use recordkeeping and user rights</td>
+            <td>Automatically generated when current location is used for weather</td>
           </tr>
           <tr>
             <td>Push Notification Permission</td>
@@ -468,7 +526,7 @@
             <td>Accessed on device with user consent</td>
           </tr>
           <tr>
-            <td>Onboarding Data (gender, age group, height, body type, preferred styles)</td>
+            <td>Onboarding data (gender, age group, optional birth month/day, height, body type, preferred styles) and saved locations on device (up to two by default or five with Plus)</td>
             <td>Personalized outfit recommendations</td>
             <td>Directly provided by user</td>
           </tr>
@@ -502,6 +560,16 @@
             <td>Rewarded ad delivery, ad performance measurement, and fraud prevention</td>
             <td>Processed through the Google AdMob SDK</td>
           </tr>
+          <tr>
+            <td>Subscription identifiers (anonymous app user UUID, product ID, purchase and restore status, expiration date, and renewal status)</td>
+            <td>Dait Plus purchase verification, entitlement delivery, purchase restoration, and fraud prevention</td>
+            <td>Processed through RevenueCat and the applicable app marketplace when a subscription is purchased or restored</td>
+          </tr>
+          <tr>
+            <td>Minimal error diagnostics (error type, hashed fingerprint, app version, and operating system; no error message)</td>
+            <td>Detecting launch failures and improving app stability</td>
+            <td>Generated only after a fatal app error; photos, location, email, and user-entered content are not collected</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -510,12 +578,14 @@
       <h2><span class="num">3</span> How We Use Your Information</h2>
       <ul>
         <li>Providing weather-based personalized outfit recommendations</li>
+        <li>Creating and authenticating optional accounts, syncing saved data, and account recovery</li>
         <li>Delivering personalized content based on user profiles</li>
         <li>Sending push notifications for weather changes and outfit suggestions</li>
         <li>Saving a selected outfit as an iPhone wallpaper or syncing it to the Apple Watch Photos face selected by the user</li>
         <li>Providing My Look, battles, and other photo features selected by the user</li>
         <li>Handling reports and blocks and maintaining a safe community</li>
         <li>Analyzing usage statistics and improving service quality</li>
+        <li>Improving app stability through minimal diagnostics that exclude personal content</li>
         <li>Providing rewarded ads and measuring ad performance</li>
         <li>Responding to user inquiries and providing customer support</li>
       </ul>
@@ -524,11 +594,12 @@
     <div class="section">
       <h2><span class="num">4</span> Data Retention and Deletion</h2>
       <p class="sub-title">Retention Period</p>
-      <p>We retain your personal information for the duration of your use of the App. Locally stored data (AsyncStorage) is removed when the App is deleted. Data stored on our servers (Supabase) can be deleted through the in-app <strong>Delete All My Data</strong> feature or by email request, and will be processed without undue delay after receipt.</p>
+      <p>We retain personal information for the duration of your use of the App. Locally stored data (AsyncStorage) is removed when the App is deleted. Server data for guests is keyed to an anonymous identifier (UUID). If you choose to sign in, the email address, display name, and account identifier supplied by your provider are linked to your Supabase Auth account. You may delete the account and related data through <strong>Delete All My Data</strong> or by email request, and we will destroy the data without undue delay. Error diagnostics are limited to five records per account per day and deleted within 30 days. Location-use confirmation records required by Article 16(2) of Korea's Location Information Act exclude coordinates and are retained for six months before deletion.</p>
       <p class="sub-title">Deletion Methods</p>
       <ul>
         <li>Electronic files are permanently deleted using methods that prevent recovery.</li>
-        <li>Location data is not stored on Dait's servers. The last queried coordinates may be stored temporarily on the device for weather checks and are removed through in-app data deletion or app deletion.</li>
+        <li>Exact coordinates are not stored in Dait's database or relay cache. They are stored on device only when weather alerts are enabled and are removed when alerts are disabled, through in-app data deletion, or when the App is deleted.</li>
+        <li>Location-use confirmation records contain no coordinates and are deleted after six months.</li>
         <li>Calendar data is used only to display schedules and support on-device outfit suggestions, and is not stored on our servers.</li>
         <li>Dait Wallpapers and Dait Watch Face images are stored in the on-device photo library. The Watch Face album keeps one latest or fixed image by replacing the prior image. You can revoke Photos access or delete the images or albums directly.</li>
         <li>User-uploaded photos are removed from file storage and related records through individual deletion or the in-app data deletion feature.</li>
@@ -556,7 +627,7 @@
         <tbody>
           <tr>
             <td>Supabase Inc.</td>
-            <td>Cloud database and file storage services</td>
+            <td>Anonymous and member authentication, Seoul-region cloud database, private user file storage, support, and security operations</td>
           </tr>
           <tr>
             <td>WeatherAPI.com (Zoomash Ltd)</td>
@@ -564,11 +635,19 @@
           </tr>
           <tr>
             <td>Cloudflare, Inc.</td>
-            <td>Weather request relay, transport security, and abuse rate limiting</td>
+            <td>Weather request relay, transport security, abuse rate limiting, and public outfit-image delivery through R2</td>
           </tr>
           <tr>
             <td>Google AdMob / Google LLC</td>
-            <td>Rewarded ad delivery, ad performance measurement, ad quality, and fraud prevention</td>
+            <td>Optional Google account authentication, rewarded ad delivery, ad performance measurement, ad quality, and fraud prevention</td>
+          </tr>
+          <tr>
+            <td>Apple Inc.</td>
+            <td>Optional Apple account authentication</td>
+          </tr>
+          <tr>
+            <td>RevenueCat, Inc.</td>
+            <td>In-app subscription verification, entitlement synchronization, purchase restoration, and subscription status management</td>
           </tr>
         </tbody>
       </table>
@@ -577,7 +656,7 @@
 
     <div class="section">
       <h2><span class="num">7</span> International Data Transfers</h2>
-      <p>Personal information may be transferred internationally when weather and advertising services are used. The Supabase database is hosted in the Seoul, Republic of Korea region.</p>
+      <p>The Supabase project's primary database is hosted in the verified Seoul, Republic of Korea (ap-northeast-2) region. International processing may still occur for support and security operations, weather retrieval, image delivery, and advertising. The transfer basis is processing or storage necessary to perform the service contract under Article 28-8(1)(3) of Korea's PIPA; separate consent is obtained in the App where required.</p>
       <table class="info-table">
         <thead>
           <tr>
@@ -588,23 +667,38 @@
         </thead>
         <tbody>
           <tr>
-            <td>WeatherAPI.com (Zoomash Ltd)<br>United Kingdom and service operation countries including the U.S., Japan, China, and India</td>
+            <td>Supabase Inc. and its published subprocessors<br>United States and countries hosting service or support facilities (primary storage: Seoul, Republic of Korea)<br>Contact: support@supabase.com</td>
+            <td>Anonymous or member UUID, optional sign-in email and display name, profile, usage, consent and location-use records, and user-upload information / database, authentication, support, and security operations</td>
+            <td>Encrypted transfer during service, support, or security processing / service term or the disclosed retention period for each category</td>
+          </tr>
+          <tr>
+            <td>WeatherAPI.com (Zoomash Ltd)<br>United Kingdom and service operation countries including the U.S., Japan, China, and India<br>Contact: www.weatherapi.com (contact form)</td>
             <td>Latitude and longitude / weather retrieval</td>
             <td>Encrypted transfer at each weather request / as required to provide the service and under the provider's retention policy</td>
           </tr>
           <tr>
-            <td>Cloudflare, Inc.<br>United States and countries where Cloudflare operates its network</td>
-            <td>Latitude, longitude, IP address, and request metadata / weather request relay, transport security, and abuse rate limiting</td>
-            <td>Encrypted transfer at each weather request / as required to provide the service and under Cloudflare's applicable retention policies</td>
+            <td>Cloudflare, Inc.<br>United States and countries where Cloudflare operates its network<br>Contact: privacyquestions@cloudflare.com</td>
+            <td>Latitude, longitude, IP address, and request metadata / weather request relay, transport security, abuse rate limiting, and public outfit-image delivery</td>
+            <td>Encrypted transfer during weather or image requests / as required to provide the service and under Cloudflare's applicable retention policies</td>
           </tr>
           <tr>
-            <td>Google LLC<br>United States and countries where Google operates data centers</td>
-            <td>Advertising identifier, device and network information, ad interactions / non-personalized rewarded ads, measurement, and fraud prevention</td>
-            <td>Encrypted transfer when the ad SDK runs or requests an ad / under Google's retention policy or until a valid deletion request</td>
+            <td>Google LLC<br>United States and countries where Google operates data centers<br>Contact: policies.google.com/privacy</td>
+            <td>When sign-in is selected: email, display name, and Google account identifier; for ads: advertising identifier, device and network information, and interactions / authentication, non-personalized rewarded ads, measurement, and fraud prevention</td>
+            <td>Encrypted transfer during Google sign-in or an ad request / under Google's retention policy or until a valid deletion request</td>
+          </tr>
+          <tr>
+            <td>Apple Inc.<br>United States and countries where Apple operates its services<br>Contact: apple.com/legal/privacy/contact</td>
+            <td>When sign-in is selected: email (or private relay address), display name, and Apple account identifier / authentication</td>
+            <td>Encrypted transfer during Apple sign-in / under Apple's retention policy or until a valid deletion request</td>
+          </tr>
+          <tr>
+            <td>RevenueCat, Inc.<br>United States and countries used by its published subprocessors<br>Contact: support@revenuecat.com</td>
+            <td>Anonymous app user UUID, product ID, purchase and restore status, expiration date, and renewal status / subscription verification, entitlement delivery, restoration, and fraud prevention</td>
+            <td>Encrypted transfer during subscription purchase, restoration, or status checks / until subscription and legal retention obligations end, subject to RevenueCat policy or a valid deletion request</td>
           </tr>
         </tbody>
       </table>
-      <p style="margin-top:12px;">You may deny location permission or change available choices under Advertising Privacy Settings. If location is denied, recommendations use a selected city or Seoul; if advertising processing is denied, rewarded additional outfits may be unavailable.</p>
+      <p style="margin-top:12px;">You may deny location permission or change available choices under Advertising Privacy Settings. If location is denied, recommendations use a selected city or Seoul; if advertising processing is denied, rewarded additional outfits may be unavailable. To refuse international processing that is essential to providing the service, delete your App data and discontinue use.</p>
     </div>
 
     <div class="section">
@@ -627,15 +721,17 @@
         <li>Supabase Row Level Security (RLS) policies for data access control</li>
         <li>My Look photos are delivered only to their owner from private file storage using expiring signed URLs</li>
         <li>Battle photos are delivered only to authenticated app users using expiring signed URLs</li>
-        <li>Minimal data collection through device ID-based authentication (no account registration required)</li>
-        <li>Location data is not stored on servers and is discarded immediately after weather retrieval</li>
+        <li>Guest access through anonymous Supabase Auth UUIDs, with only the Google or Apple account information selected by the user collected for optional sign-in</li>
+        <li>Exact coordinates are not stored on servers and are discarded immediately after weather retrieval</li>
+        <li>Coordinate-free location-use confirmation records are automatically recorded and deleted after six months</li>
         <li>Regular security audits and vulnerability monitoring</li>
       </ul>
     </div>
 
     <div class="section">
-      <h2><span class="num">10</span> Cookies and Tracking</h2>
+      <h2><span class="num">10</span> Cookies, Tracking, and Behavioral Information</h2>
       <p>The App does not use web cookies. However, we may collect in-app usage data (views, likes, saves) for service improvement. You can opt out through the in-app data deletion feature or by uninstalling the App.</p>
+      <p style="margin-top:12px;">The App does not collect or use behavioral information for personalized advertising and is configured to serve only <strong>non-personalized ads</strong> through Google AdMob. During ad delivery, advertising identifiers and device information may be processed for ad serving, frequency capping, and fraud prevention. You can limit or reset the advertising identifier in your device settings (iOS: Settings › Privacy &amp; Security › Tracking; Android: Settings › Google › Ads). Choosing not to watch rewarded ads does not restrict basic service use; only the additional outfit feature may be unavailable.</p>
     </div>
 
     <div class="section">
@@ -647,7 +743,7 @@
       <h2><span class="num">12</span> Contact Us</h2>
       <div class="contact-box">
         <p><strong>App Name:</strong> Dait</p>
-        <p><strong>Developer:</strong> Onda</p>
+        <p><strong>Privacy Officer (Developer):</strong> Son Taesub</p>
         <p><strong>Email:</strong> <a href="mailto:gh0601060@gmail.com">gh0601060@gmail.com</a></p>
       </div>
       <p style="margin-top:12px;">For any privacy-related inquiries, please contact us at the email address above. We will respond within <strong>3 business days</strong>.</p>
@@ -658,7 +754,7 @@
       <p>This Privacy Policy may be updated to reflect changes in laws, policies, or security practices. Any changes will be communicated through in-app notices or push notifications. Changes will take effect 7 days after the notification date.</p>
     </div>
 
-    <p class="footer-note">This Privacy Policy is effective as of July 19, 2026.</p>
+    <p class="footer-note">This Privacy Policy is effective as of August 1, 2026.</p>
   </div>
 </div>
 
