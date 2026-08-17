@@ -9,11 +9,13 @@
   *{box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif;line-height:1.55;margin:0}
   main{margin:0 auto;max-width:860px;padding:40px 20px 80px}header{margin-bottom:28px}h1{font-size:28px;margin:0 0 8px}header p{color:var(--muted);margin:4px 0}
   section{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin:14px 0;padding:20px}ul{margin:0 0 16px;padding-left:22px}li{margin:4px 0;overflow-wrap:anywhere}li span{color:var(--muted);font-size:12px;margin-left:6px}
-  a{color:var(--accent)}pre{background:#f3f4f6;border-radius:6px;font-size:11px;line-height:1.45;margin:0;max-height:320px;overflow:auto;padding:14px;white-space:pre-wrap;word-break:break-word}
+  a{color:var(--accent)}nav{font-size:14px;margin-bottom:18px}pre{background:#f3f4f6;border-radius:6px;font-size:11px;line-height:1.45;margin:0;max-height:320px;overflow:auto;padding:14px;white-space:pre-wrap;word-break:break-word}
 </style>
 </head>
 <body><main>
-<header><h1>오픈소스 라이선스</h1><p>데잇(Dait)이 사용하는 제3자 소프트웨어의 저작권 및 라이선스 고지입니다.</p><p>생성일 2026-07-20 · 625 packages · 321 license texts</p></header>
+<nav aria-label="Language"><a href="?lang=ko">한국어</a> · <a href="?lang=en">English</a></nav>
+<header id="notices-ko"><h1>오픈소스 라이선스</h1><p>데잇(Dait)이 사용하는 제3자 소프트웨어의 저작권 및 라이선스 고지입니다.</p><p>생성일 2026-07-20 · 625 packages · 321 license texts</p></header>
+<header id="notices-en" hidden><h1>Third-Party Notices</h1><p>Copyright and license notices for third-party software used by Dait.</p><p>Generated July 20, 2026 · 625 packages · 321 license texts</p></header>
 <section><ul><li><a href="https://github.com/0no-co/graphql.web">@0no-co/graphql.web@1.3.2</a> <span>MIT</span></li>
 <li><a href="https://github.com/0no-co/wonka">wonka@6.3.6</a> <span>MIT</span></li></ul><pre>MIT License
 
@@ -13067,4 +13069,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</pre></section>
+<script>
+const requestedLanguage = new URLSearchParams(window.location.search).get('lang');
+if (requestedLanguage === 'en') {
+  document.documentElement.lang = 'en';
+  document.title = 'Third-Party Notices | Dait';
+  document.getElementById('notices-ko').hidden = true;
+  document.getElementById('notices-en').hidden = false;
+}
+</script>
 </main></body></html>

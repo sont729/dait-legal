@@ -181,8 +181,8 @@
 
 <div class="container">
   <div class="lang-switch">
-    <button class="lang-btn active" onclick="switchLang('ko')">한국어</button>
-    <button class="lang-btn" onclick="switchLang('en')">English</button>
+    <button class="lang-btn active" onclick="switchLang('ko', this)">한국어</button>
+    <button class="lang-btn" onclick="switchLang('en', this)">English</button>
   </div>
 
   <!-- ==================== 한국어 ==================== -->
@@ -190,7 +190,7 @@
     <div class="app-header">
       <h1>개인정보처리방침</h1>
       <p class="subtitle">데잇(Dait)</p>
-      <span class="effective-date">시행일: 2026년 8월 3일</span>
+      <span class="effective-date">시행일: 2026년 8월 15일</span>
     </div>
 
     <div class="section">
@@ -412,7 +412,7 @@
           </tr>
         </tbody>
       </table>
-      <p style="margin-top:12px;">이용자는 위치 권한을 거부하거나 광고 개인정보 설정에서 선택을 변경할 수 있습니다. 위치 권한을 거부하면 현재 위치 대신 선택 지역 또는 서울 기준으로 추천하며, 광고 처리를 거부하면 보상형 추가 코디 기능이 제한될 수 있습니다. 서비스 제공에 필수적인 국외 처리위탁·보관을 거부하려면 앱 내 데이터 삭제 후 이용을 중단할 수 있습니다.</p>
+      <p style="margin-top:12px;">이용자는 위치 권한을 거부하거나 광고 개인정보 설정에서 선택을 변경할 수 있습니다. 위치 권한을 거부하면 직접 선택한 지역을 기준으로 추천하며, 저장된 지역도 없으면 지역을 선택하기 전까지 날씨 기반 추천을 제공하지 않습니다. 광고 처리를 거부하면 보상형 추가 코디 기능이 제한될 수 있습니다. 서비스 제공에 필수적인 국외 처리위탁·보관을 거부하려면 앱 내 데이터 삭제 후 이용을 중단할 수 있습니다.</p>
     </div>
 
     <div class="section">
@@ -468,7 +468,7 @@
       <p>본 개인정보처리방침은 법령, 정책 또는 보안 기술의 변경에 따라 수정될 수 있으며, 변경 시 앱 내 공지사항 또는 푸시 알림을 통해 사전 고지합니다. 변경 사항은 고지일로부터 7일 후 효력이 발생합니다.</p>
     </div>
 
-    <p class="footer-note">본 개인정보처리방침은 2026년 8월 1일부터 시행됩니다.</p>
+    <p class="footer-note">본 개인정보처리방침은 2026년 8월 15일부터 시행됩니다.</p>
   </div>
 
   <!-- ==================== English ==================== -->
@@ -476,7 +476,7 @@
     <div class="app-header">
       <h1>Privacy Policy</h1>
       <p class="subtitle">Dait</p>
-      <span class="effective-date">Effective Date: August 3, 2026</span>
+      <span class="effective-date">Effective Date: August 15, 2026</span>
     </div>
 
     <div class="section">
@@ -698,7 +698,7 @@
           </tr>
         </tbody>
       </table>
-      <p style="margin-top:12px;">You may deny location permission or change available choices under Advertising Privacy Settings. If location is denied, recommendations use a selected city or Seoul; if advertising processing is denied, rewarded additional outfits may be unavailable. To refuse international processing that is essential to providing the service, delete your App data and discontinue use.</p>
+      <p style="margin-top:12px;">You may deny location permission or change available choices under Advertising Privacy Settings. If location is denied, recommendations use a city you choose manually. If no saved city is available, weather-based recommendations remain unavailable until you select one. If advertising processing is denied, rewarded additional outfits may be unavailable. To refuse international processing that is essential to providing the service, delete your App data and discontinue use.</p>
     </div>
 
     <div class="section">
@@ -754,19 +754,24 @@
       <p>This Privacy Policy may be updated to reflect changes in laws, policies, or security practices. Any changes will be communicated through in-app notices or push notifications. Changes will take effect 7 days after the notification date.</p>
     </div>
 
-    <p class="footer-note">This Privacy Policy is effective as of August 1, 2026.</p>
+    <p class="footer-note">This Privacy Policy is effective as of August 15, 2026.</p>
   </div>
 </div>
 
 <script>
-function switchLang(lang) {
+function switchLang(lang, sourceButton) {
   document.getElementById('ko-content').style.display = lang === 'ko' ? 'block' : 'none';
   document.getElementById('en-content').style.display = lang === 'en' ? 'block' : 'none';
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
+  const activeButton = sourceButton || document.querySelector(`.lang-btn[onclick^="switchLang('${lang}'"]`);
+  if (activeButton) activeButton.classList.add('active');
   document.documentElement.lang = lang;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.title = lang === 'en' ? 'Privacy Policy | Dait' : '개인정보처리방침 | 데잇(Dait)';
+  if (sourceButton) window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+const requestedLanguage = new URLSearchParams(window.location.search).get('lang');
+if (requestedLanguage === 'en') switchLang('en');
 </script>
 
 </body>
