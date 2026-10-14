@@ -194,7 +194,7 @@
       <p>New support submissions for general users are currently disabled. This notice applies after the retention and disposal rules for credit-processing records are finalized and announced, support is enabled on or after the planned effective date, and you choose to submit an inquiry or review photos. Submissions do not open automatically on that date. Separately authorized operator testing also presents these processing details and obtains optional photo consent before any photo submission.</p>
       <ul>
         <li><strong>Data and purpose:</strong> We process your account identifier, links to the relevant generation and credit transaction, issue category, description, follow-up replies, status and processing times to provide customer support, review output quality, restore generation credits and prevent duplicate restoration.</li>
-        <li><strong>Separate, optional photo consent:</strong> We upload only the review copies you select from the input-person photo, selected clothing photo and generated result linked to that generation. Wardrobe try-ons currently link only the first clothing item. Support does not retrieve, prepare or transmit comparison photos from your device before consent, and does not alter the originals. Even though generation inputs are not retained as part of the generation process, the copies you choose to submit to support are retained separately as described below.</li>
+        <li><strong>Separate, optional photo consent:</strong> We upload only the review copies you select from the input-person photo, selected clothing photo and generated result linked to that generation. New wardrobe try-ons can link up to four selected garment photos for support review; older generations may have only the first item available. Support does not retrieve, prepare or transmit comparison photos from your device before consent, and does not alter the originals. Even though generation inputs are not retained as part of the generation process, the copies you choose to submit to support are retained separately as described below.</li>
         <li><strong>Declining or withdrawing:</strong> You may submit a text-only inquiry without photo consent, and your basic service access is unaffected. Without before-and-after photos, we may be unable to determine whether a quality issue qualifies for credit restoration. You may request deletion or suspension of processing of submitted photos by emailing the privacy officer below.</li>
         <li><strong>Access and service provider:</strong> Inquiries and photos are linked to your account and generation in Supabase's private storage and database in Seoul, Republic of Korea (ap-northeast-2). Request handling, authentication and other function processing, support and security operations may occur outside that storage region. You can view your own inquiry; review is performed by Dait support staff with separately assigned access. Photo-viewing links last no more than five minutes and never extend beyond the photo retention deadline. This support process does not send photos or inquiries back to a generative AI provider or use them for advertising or model training. See sections 6 and 7 for Supabase's processing and international-transfer scope.</li>
         <li><strong>Photo and inquiry retention:</strong> Photos are scheduled for deletion 30 days after inquiry creation; descriptions, conversations and processing history after 90 days. Follow-up replies or attachments do not extend these periods. No new photo-viewing links are issued after expiry. Actual deletion may be delayed by the five-minute cleanup schedule and storage responses. Account deletion also schedules support inquiries and photos for deletion; uploads already in progress that finish later are cleaned up again.</li>
@@ -231,7 +231,7 @@
           <tr>
             <td>Location Data (latitude/longitude)</td>
             <td>Weather-based outfit recommendations</td>
-            <td>Collected with user consent and sent through Cloudflare to WeatherAPI</td>
+            <td>Collected with user consent and sent through Cloudflare to WeatherAPI (in Korea, also looked up from the Korea Meteorological Administration API as a ~5 km grid cell)</td>
           </tr>
           <tr>
             <td>Location-use confirmation record (anonymous UUID, time, purpose, path, method, and processors; no coordinates)</td>
@@ -249,24 +249,34 @@
             <td>Accessed on device with user consent</td>
           </tr>
           <tr>
-            <td>Onboarding data (gender, age group, optional birth month/day, height, body type, preferred styles) and saved locations on device (up to two by default or five with Plus)</td>
+            <td>Profile data (gender selected during current registration and any previously supplied age group, birth month/day, height, body type, and preferred styles) and saved locations on device (up to two by default or five with Plus)</td>
             <td>Personalized outfit recommendations</td>
             <td>Directly provided by user</td>
           </tr>
           <tr>
-            <td>Age 14+ confirmation and consent records (version and timestamp)</td>
+            <td>Age 18+ confirmation and consent records (version and timestamp)</td>
             <td>Eligibility confirmation and consent record management</td>
             <td>Generated when the user confirms and agrees</td>
           </tr>
           <tr>
-            <td>User-uploaded photos and captions</td>
-            <td>Providing My Look, battles, and other photo features selected by the user</td>
-            <td>Directly selected by the user from the camera or photo library</td>
+            <td>Fashion try-on (Pro and credits): the photo of yourself and garment photos you choose, the generated image, the age 18+ confirmation record (version and time), and the photo-transfer consent version</td>
+            <td>Generating AI try-on images, delivering results, usage and billing settlement, age confirmation</td>
+            <td>The selected photo of yourself and garment photos are sent to the Meta Model API after the 18+ confirmation and Meta Muse photo-transfer consent when you request a generation. Dait handles input photos in server memory during the request and does not keep them in its database or file storage. Results are kept in private server storage for 7 days, then access is blocked and a cleanup job deletes them. A photo of yourself that you choose to save stays on this device only</td>
           </tr>
           <tr>
-            <td>Photo Library access and the Dait Wallpapers and Dait Watch Face albums</td>
-            <td>Saving a selected outfit as an iPhone wallpaper or syncing it to an Apple Watch Photos face</td>
-            <td>With permission, the App creates dedicated on-device albums. The Watch Face album keeps one latest or fixed image; no additional photo is uploaded to our servers for this process</td>
+            <td>Outfit weather coach: the clothing photo you choose, a photo hash, and the analyzed clothing attributes</td>
+            <td>Checking whether the chosen outfit suits today's and tomorrow's weather</td>
+            <td>Sent to the Google Gemini API after photo-transfer consent when you request an analysis. Dait does not store the original photo; clothing attributes are kept for 7 days</td>
+          </tr>
+          <tr>
+            <td>Wardrobe garment analysis: the clothing or accessory photo you choose, a photo hash, and the analyzed item attributes</td>
+            <td>Extracting category, color, silhouette, and design attributes for wardrobe registration</td>
+            <td>Sent to OpenRouter (Qwen model API) after photo-transfer consent when you request an analysis. Dait does not store the original photo on its servers; analyzed attributes are kept for up to 30 days and then deleted (on-device wardrobe originals and cutouts stay on this device only)</td>
+          </tr>
+          <tr>
+            <td>Photo Library access and the Dait Wallpapers and Dait watch photo albums</td>
+            <td>Saving a selected outfit as an iPhone wallpaper, or showing saved outfits and try-on results on an Apple Watch Photos face (Plus)</td>
+            <td>Permission is requested when you turn the feature on. The App keeps a dedicated on-device album equal to your saved list (up to the latest 100). Photos that leave the list are never deleted automatically, and no photo is sent to our servers for this</td>
           </tr>
           <tr>
             <td>Report and block records</td>
@@ -285,7 +295,7 @@
           </tr>
           <tr>
             <td>Subscription identifiers (anonymous app user UUID, product ID, purchase and restore status, expiration date, and renewal status)</td>
-            <td>Dait Plus purchase verification, entitlement delivery, purchase restoration, and fraud prevention</td>
+            <td>Dait Plus and Pro subscription and fashion try-on credit purchase verification, entitlement delivery, purchase restoration, and fraud prevention</td>
             <td>Processed through RevenueCat and the applicable app marketplace when a subscription is purchased or restored</td>
           </tr>
           <tr>
@@ -304,9 +314,9 @@
         <li>Creating and authenticating optional accounts, syncing saved data, and account recovery</li>
         <li>Delivering personalized content based on user profiles</li>
         <li>Sending push notifications for weather changes and outfit suggestions</li>
-        <li>Saving a selected outfit as an iPhone wallpaper or syncing it to the Apple Watch Photos face selected by the user</li>
-        <li>Providing My Look, battles, and other photo features selected by the user</li>
-        <li>Handling reports and blocks and maintaining a safe community</li>
+        <li>Saving a selected outfit as an iPhone wallpaper or showing it on an Apple Watch Photos face</li>
+        <li>Providing the AI fashion try-on, outfit weather coach, and wardrobe garment analyses you request</li>
+        <li>Handling outfit photo reports and protecting users</li>
         <li>Analyzing usage statistics and improving service quality</li>
         <li>Improving app stability through minimal diagnostics that exclude personal content</li>
         <li>Providing rewarded ads and measuring ad performance</li>
@@ -324,8 +334,13 @@
         <li>Exact coordinates are not stored in Dait's database or relay cache. They are stored on device only when weather alerts are enabled and are removed when alerts are disabled, through in-app data deletion, or when the App is deleted.</li>
         <li>Location-use confirmation records contain no coordinates and are deleted after six months.</li>
         <li>Calendar data is used only to display schedules and support on-device outfit suggestions, and is not stored on our servers.</li>
-        <li>Dait Wallpapers and Dait Watch Face images are stored in the on-device photo library. The Watch Face album keeps one latest or fixed image by replacing the prior image. You can revoke Photos access or delete the images or albums directly.</li>
-        <li>User-uploaded photos are removed from file storage and related records through individual deletion or the in-app data deletion feature.</li>
+        <li>Dait Wallpapers and Dait watch photos are stored in the on-device photo library and are never deleted automatically by the App. You can revoke Photos access or delete the images or albums directly.</li>
+        <li>Fashion try-on: Dait handles input photos in server memory during generation and does not retain them as part of that process. Separately submitted support copies follow the additional support notice above. Server results are blocked after 7 days and removed by a cleanup job. Results saved in the App or Photos stay on the device until you delete them. Usage and billing records, kept apart from photos, are retained until one day after the relevant billing period ends.</li>
+        <li>Outfit weather coach: Dait does not store the original photo, and analyzed clothing attributes are deleted after 7 days. Deleting your account also deletes related records.</li>
+        <li>Wardrobe garment analysis: Dait does not store the original photo on its servers, and analyzed clothing attributes are deleted after 30 days. Deleting your account also deletes on-device wardrobe items and server analysis records.</li>
+        <li>Meta Muse fashion try-on uses Standard Services. Meta states that it does not use this content to train Meta models, but may process and retain it to provide services, comply with law, and review safety, security, abuse and policy violations. Provider retention is separate from Dait's input and 7-day result policies. See <a href="https://dev.meta.ai/legal/commitments">Meta's data commitments</a> and <a href="https://dev.meta.ai/legal/terms-of-service">service terms</a>.</li>
+        <li>Processing and retention by Google for the outfit weather coach follow Google's terms. The paid Gemini API states that inputs and outputs are not used to improve models, but they may be logged for a limited period for safety and abuse detection.</li>
+        <li>Wardrobe garment analysis requests via OpenRouter are sent with data collection and model training disabled (`data_collection: deny`). Safety, abuse-prevention logging, and retention by OpenRouter and its inference infrastructure follow the <a href="https://openrouter.ai/privacy">OpenRouter Privacy Policy</a>.</li>
       </ul>
     </div>
 
@@ -365,12 +380,28 @@
             <td>Optional Google account authentication, rewarded ad delivery, ad performance measurement, ad quality, and fraud prevention</td>
           </tr>
           <tr>
+            <td>Meta Platforms, Inc. (Meta Model API / Muse Image)</td>
+            <td>Fashion try-on image generation that you request after separate photo-transfer consent</td>
+          </tr>
+          <tr>
+            <td>Google LLC (Gemini API)</td>
+            <td>Outfit weather coach photo analysis that you request</td>
+          </tr>
+          <tr>
+            <td>OpenRouter, Inc. (Qwen model API)</td>
+            <td>Wardrobe garment and accessory attribute analysis that you request after separate photo-transfer consent</td>
+          </tr>
+          <tr>
             <td>Apple Inc.</td>
             <td>Optional Apple account authentication</td>
           </tr>
           <tr>
             <td>RevenueCat, Inc.</td>
             <td>In-app subscription verification, entitlement synchronization, purchase restoration, and subscription status management</td>
+          </tr>
+          <tr>
+            <td>Expo (650 Industries, Inc.)</td>
+            <td>Delivery of remote push notifications such as weather-change alerts (relayed through Apple and Google push services)</td>
           </tr>
         </tbody>
       </table>
@@ -391,7 +422,7 @@
         <tbody>
           <tr>
             <td>Supabase Inc. and its published subprocessors<br>United States and countries hosting service or support facilities (primary storage: Seoul, Republic of Korea)<br>Contact: support@supabase.com</td>
-            <td>Anonymous or member UUID, optional sign-in email and display name, profile, usage, consent and location-use records, and user-upload information, optional support review photos and inquiries, and credit-restoration links / database, authentication, support, and security operations</td>
+            <td>Anonymous or member UUID, optional sign-in email and display name, profile, usage, consent and location-use records, user-upload information, optional support review photos and inquiries, and credit-restoration links, push token and 5 km weather grid for remote alerts, and for Apple sign-in members an encrypted token used only to remove the Apple sign-in link when the account is deleted / database, authentication, support, and security operations</td>
             <td>Encrypted transfer during service, support, or security processing / service term or the disclosed retention period for each category</td>
           </tr>
           <tr>
@@ -406,18 +437,33 @@
           </tr>
           <tr>
             <td>Google LLC<br>United States and countries where Google operates data centers<br>Contact: policies.google.com/privacy</td>
-            <td>When sign-in is selected: email, display name, and Google account identifier; for ads: advertising identifier, device and network information, and interactions / authentication, non-personalized rewarded ads, measurement, and fraud prevention</td>
-            <td>Encrypted transfer during Google sign-in or an ad request / under Google's retention policy or until a valid deletion request</td>
+            <td>When sign-in is selected: email, display name, and Google account identifier; for ads: advertising identifier, device and network information, and interactions; for remote alerts on Android: FCM registration token and Firebase installation ID; for the outfit weather coach: the photos you choose / authentication, non-personalized rewarded ads, measurement, fraud prevention, push delivery, and AI photo analysis (Gemini API)</td>
+            <td>Encrypted transfer during Google sign-in, an ad request, alert registration, or an analysis request / under Google's retention policy or until a valid deletion request (the Gemini API may log for a limited period for safety and abuse detection)</td>
+          </tr>
+          <tr>
+            <td>Meta Platforms, Inc. (Meta Model API)<br>United States and countries where Meta operates its data centers and services<br>Contact: <a href="https://dev.meta.ai/legal/terms-of-service">Meta Model API account support</a></td>
+            <td>Your selected person and clothing photos, generation instructions and output image / requested fashion try-on generation and delivery, and provider safety and abuse prevention</td>
+            <td>Encrypted transfer at generation after separate photo-transfer consent / as needed under <a href="https://dev.meta.ai/legal/terms-of-service">section 4.4 of Meta's terms</a> for service, legal, safety, abuse and policy review purposes. Separate from Dait's input and 7-day result policies</td>
+          </tr>
+          <tr>
+            <td>OpenRouter, Inc. and inference infrastructure providers<br>United States and service operation countries<br>Contact: privacy@openrouter.ai (<a href="https://openrouter.ai/privacy">Privacy Policy</a>)</td>
+            <td>Your selected clothing or accessory photo and analysis instructions after separate consent / wardrobe garment attribute analysis (Qwen model)</td>
+            <td>Encrypted transfer upon analysis request (`data_collection: deny`) / Dait does not retain the original photo and deletes analyzed attributes after 30 days; provider processing follows the <a href="https://openrouter.ai/privacy">OpenRouter policy</a></td>
           </tr>
           <tr>
             <td>Apple Inc.<br>United States and countries where Apple operates its services<br>Contact: apple.com/legal/privacy/contact</td>
-            <td>When sign-in is selected: email (or private relay address), display name, and Apple account identifier / authentication</td>
-            <td>Encrypted transfer during Apple sign-in / under Apple's retention policy or until a valid deletion request</td>
+            <td>When sign-in is selected: email (or private relay address), display name, and Apple account identifier; for remote alerts on iPhone: APNs device token / authentication and push delivery</td>
+            <td>Encrypted transfer during Apple sign-in or alert registration / under Apple's retention policy or until a valid deletion request</td>
           </tr>
           <tr>
             <td>RevenueCat, Inc.<br>United States and countries used by its published subprocessors<br>Contact: support@revenuecat.com</td>
             <td>Anonymous app user UUID, product ID, purchase and restore status, expiration date, and renewal status / subscription verification, entitlement delivery, restoration, and fraud prevention</td>
             <td>Encrypted transfer during subscription purchase, restoration, or status checks / until subscription and legal retention obligations end, subject to RevenueCat policy or a valid deletion request</td>
+          </tr>
+          <tr>
+            <td>Expo (650 Industries, Inc.)<br>United States<br>Contact: privacy@expo.dev</td>
+            <td>Expo push token and alert content (weather-change notices) / remote push delivery</td>
+            <td>Encrypted transfer when an alert is sent / as needed for delivery and under Expo's policy (the token is unregistered when alerts are turned off or the account is deleted)</td>
           </tr>
         </tbody>
       </table>
@@ -425,25 +471,26 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">8</span> Your Rights</h2>
-      <p>You have the right to:</p>
+      <h2><span class="num">8</span> Your Rights (Korea, Japan, U.S., Canada, Australia)</h2>
+      <p>Depending on your jurisdiction (including Korea under PIPA, Japan under APPI, U.S. states such as California under the CCPA/CPRA, Canada under PIPEDA, and Australia under the Privacy Act 1988), you have the right to:</p>
       <ul>
-        <li>Access, correct, or delete your personal information</li>
-        <li>Request suspension of personal information processing</li>
+        <li>Know, access, correct, port, or delete your personal information</li>
+        <li>Request suspension of personal information processing or withdraw consent</li>
         <li>Revoke location and notification permissions (via your device settings)</li>
         <li>Revoke calendar access (via your device settings)</li>
+        <li>Not receive discriminatory treatment for exercising your privacy rights</li>
       </ul>
-      <p style="margin-top:12px;">To exercise these rights, please contact us using the information provided below. We will process your request without delay.</p>
+      <p style="margin-top:12px;">To exercise these rights, please contact us using the information provided below or use the in-app account/data deletion feature. We will process your request without delay.</p>
     </div>
 
     <div class="section">
-      <h2><span class="num">9</span> Data Security</h2>
+      <h2><span class="num">9</span> Data Security and No Biometric Identifier Extraction</h2>
       <p>We implement the following measures to ensure the security of your personal information:</p>
       <ul>
         <li>HTTPS (TLS) encryption for all data transmissions</li>
         <li>Supabase Row Level Security (RLS) policies for data access control</li>
-        <li>My Look photos are delivered only to their owner from private file storage using expiring signed URLs</li>
-        <li>Battle photos are delivered only to authenticated app users using expiring signed URLs</li>
+        <li>Fashion try-on results are delivered only to their owner from private file storage using expiring signed URLs</li>
+        <li><strong>No Biometric Identifiers:</strong> When processing photos for AI fashion try-on, wardrobe analysis, or the outfit weather coach, Dait does not extract, collect, or store facial geometry scans, biometric templates, voiceprints, or other biometric identifiers (as defined under laws such as the Illinois Biometric Information Privacy Act or Texas CUBI) to identify any individual</li>
         <li>Guest access through anonymous Supabase Auth UUIDs, with only the Google or Apple account information selected by the user collected for optional sign-in</li>
         <li>Exact coordinates are not stored on servers and are discarded immediately after weather retrieval</li>
         <li>Coordinate-free location-use confirmation records are automatically recorded and deleted after six months</li>
@@ -452,14 +499,14 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">10</span> Cookies, Tracking, and Behavioral Information</h2>
+      <h2><span class="num">10</span> Cookies, Tracking, and No Sale or Sharing of Personal Information</h2>
       <p>The App does not use web cookies. However, we may collect in-app usage data (views, likes, saves) for service improvement. You can opt out through the in-app data deletion feature or by uninstalling the App.</p>
-      <p style="margin-top:12px;">The App does not collect or use behavioral information for personalized advertising and is configured to serve only <strong>non-personalized ads</strong> through Google AdMob. During ad delivery, advertising identifiers and device information may be processed for ad serving, frequency capping, and fraud prevention. You can limit or reset the advertising identifier in your device settings (iOS: Settings › Privacy &amp; Security › Tracking; Android: Settings › Google › Ads). Choosing not to watch rewarded ads does not restrict basic service use; only the additional outfit feature may be unavailable.</p>
+      <p style="margin-top:12px;"><strong>No Sale or Sharing (CCPA/CPRA):</strong> The App does not collect or use behavioral information for personalized advertising and does <strong>not "sell"</strong> personal information or <strong>"share"</strong> personal information for cross-context behavioral advertising. It is configured to serve only <strong>non-personalized ads</strong> through Google AdMob. During ad delivery, advertising identifiers and device information may be processed for ad serving, frequency capping, and fraud prevention. You can limit or reset the advertising identifier in your device settings (iOS: Settings › Privacy &amp; Security › Tracking; Android: Settings › Google › Ads). Choosing not to watch rewarded ads does not restrict basic service use; only the additional outfit feature may be unavailable.</p>
     </div>
 
     <div class="section">
-      <h2><span class="num">11</span> Children's Privacy</h2>
-      <p>The App is intended for users aged 14 or older and asks users to confirm eligibility during onboarding. If we become aware that a child under 14 has provided personal information, we will delete it without undue delay.</p>
+      <h2><span class="num">11</span> Users Under 18</h2>
+      <p>The App is intended for users aged 18 or older and asks users to confirm eligibility during onboarding. If we confirm use by a person under 18, we stop their service access and delete unnecessary personal information without undue delay, except minimal records we are legally required to retain.</p>
     </div>
 
     <div class="section">
@@ -477,7 +524,7 @@
       <p>This Privacy Policy may be updated to reflect changes in laws, policies, or security practices. Any changes will be communicated through in-app notices or push notifications. Changes will take effect 7 days after the notification date.</p>
     </div>
 
-    <p class="footer-note">This Privacy Policy is effective as of August 15, 2026.</p>
+    <p class="footer-note">This Privacy Policy is effective as of August 15, 2026 (Revised October 15, 2026).</p>
 </main>
 </body>
 </html>
