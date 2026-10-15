@@ -276,7 +276,7 @@
           <tr>
             <td>내 옷장 옷 분석: 이용자가 선택한 옷·액세서리 사진, 사진 해시와 분석한 옷 속성</td>
             <td>옷장에 등록할 옷·액세서리의 종류·색상·형태 등 속성 분석</td>
-            <td>사진 전송 동의 후 분석을 요청할 때 OpenRouter(Qwen 모델 API)로 전송. 사진 원본은 데잇 서버에 저장하지 않고 분석 속성은 최대 30일 보관 후 파기(기기 옷장 원본·누끼 파일은 이 기기에만 보관)</td>
+            <td>사진 전송 동의 후 분석을 요청할 때 OpenRouter(Qwen 모델 API)로 전송. 사진 원본은 데잇 서버에 저장하지 않고 서버 분석 캐시는 30일 만료로 설정하며 정리 작업 후 삭제(제4항 참조). 기기 옷장 원본·누끼와 옷 정보는 직접 삭제할 때까지 이 기기에 보관</td>
           </tr>
           <tr>
             <td>사진 보관함 접근 및 Dait Wallpapers·Dait 시계 사진 앨범</td>
@@ -342,7 +342,7 @@
         <li>Dait Wallpapers·Dait 시계 사진: 기기 사진 보관함에 저장하며 앱이 자동으로 지우지 않음. 이용자가 사진 접근을 해제하거나 해당 사진·앨범을 직접 삭제할 수 있음</li>
         <li>패션합성: 입력 사진은 생성 요청 중 데잇 서버 메모리에서 처리하며 생성 과정에서는 DB·파일 저장소에 보관하지 않음. 별도 선택 제출한 고객센터 검토용 사본은 위 추가 고지의 보관 기간을 따름. 생성 결과는 서버에서 7일 뒤 조회를 막고 정리 작업에서 삭제함. 앱과 사진첩에 저장한 결과는 이용자가 직접 삭제할 때까지 기기에 남음. 사용량·결제 기록은 사진과 분리해 해당 결제 기간이 끝난 뒤 하루까지 보관</li>
         <li>옷 날씨 코치: 사진 원본은 데잇 서버에 저장하지 않으며 분석한 옷 특성은 7일 뒤 삭제. 계정을 삭제하면 관련 기록도 함께 삭제</li>
-        <li>내 옷장 옷 분석: 사진 원본은 데잇 서버에 저장하지 않으며 분석한 옷 속성은 30일 뒤 삭제. 계정을 삭제하면 기기 옷장과 서버 분석 기록도 함께 삭제</li>
+        <li>내 옷장 옷 분석: 사진 원본은 데잇 서버에 저장하지 않습니다. 서버 분석 캐시와 요청 기록은 30일을 기준으로 만료·삭제 대상으로 처리하며, 만료한 캐시는 재사용하지 않습니다. 실제 삭제는 매시간 주기의 정리 작업 및 후속 요청에서 처리하므로 예약 상태·서버 응답에 따라 늦어질 수 있습니다. 기기 옷장의 사진·누끼와 옷 정보는 사용자가 삭제할 때까지 기기에 남으며, 계정을 삭제하면 기기 옷장과 서버 분석 기록도 삭제 대상으로 처리합니다</li>
         <li>패션합성 공급자 Meta Muse는 Standard Services에 해당하며 입력·결과를 Meta 모델 훈련에 사용하지 않는다고 안내함. 다만 서비스 제공, 법적 의무, 안전·보안·남용 및 정책 위반 검토 등을 위해 처리·보관할 수 있음. 공급자 보관은 데잇 서버의 입력 미보관·결과 7일 정책과 별개이며 <a href="https://dev.meta.ai/legal/commitments">Meta 데이터 처리 안내</a>와 <a href="https://dev.meta.ai/legal/terms-of-service">서비스 약관</a>을 따름</li>
         <li>옷 날씨 코치 공급자 Google의 처리와 보관은 공급자 약관을 따름. 유료 Gemini API는 입력·응답을 모델 개선에 쓰지 않는다고 안내하지만, 안전·위반 탐지를 위해 제한된 기간 기록할 수 있음</li>
         <li>내 옷장 분석 공급자 OpenRouter는 요청 시 데이터 수집·학습 거부(`data_collection: deny`) 설정으로 호출하며, 공급자 및 추론 인프라의 안전·남용 방지 로깅 및 보관은 <a href="https://openrouter.ai/privacy">OpenRouter 개인정보처리방침</a>을 따름</li>
@@ -453,7 +453,7 @@
           <tr>
             <td>OpenRouter, Inc. 및 추론 제공 인프라<br>미국 및 서비스 운영 국가<br>연락처: privacy@openrouter.ai (<a href="https://openrouter.ai/privacy">개인정보처리방침</a>)</td>
             <td>이용자가 별도 동의 후 선택한 옷·액세서리 사진 및 분석 지시문 / 내 옷장 옷 속성 분석(Qwen 모델)</td>
-            <td>별도 사진 전송 동의 후 분석 요청 시 암호화 통신(`data_collection: deny`) / 데잇 서버는 사진 원본 미보관·분석 결과 30일 보관 후 파기, 공급자 측 처리는 <a href="https://openrouter.ai/privacy">OpenRouter 정책</a>에 따름</td>
+            <td>별도 사진 전송 동의 후 분석 요청 시 암호화 통신(`data_collection: deny`) / 데잇 서버는 사진 원본 미보관·분석 캐시 30일 만료 및 정리 작업 후 삭제(제4항 참조), 공급자 측 처리는 <a href="https://openrouter.ai/privacy">OpenRouter 정책</a>에 따름</td>
           </tr>
           <tr>
             <td>Apple Inc.<br>미국 및 Apple 서비스 운영 국가<br>연락처: apple.com/legal/privacy/contact</td>
@@ -489,13 +489,13 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">9</span> 개인정보의 안전성 확보 조치 및 생체식별정보 미추출</h2>
+      <h2><span class="num">9</span> 개인정보의 안전성 확보 조치 및 기기 내 사진 보정</h2>
       <p>앱은 개인정보의 안전한 처리를 위해 다음 조치를 시행합니다.</p>
       <ul>
         <li>데이터 전송 시 HTTPS(TLS) 암호화 적용</li>
         <li>Supabase Row Level Security(RLS) 정책을 통한 데이터 접근 제어</li>
         <li>패션합성 결과는 비공개 파일 저장소와 만료되는 서명 URL을 통해 본인에게만 제공</li>
-        <li><strong>생체식별정보 미추출:</strong> 패션합성·내 옷장·내 옷 날씨 코치 기능에서 이용자 사진을 처리할 때, 특정 개인을 식별하기 위한 얼굴 기하학 정보(안면 인식 템플릿)·홍채·지문 등 생체식별자(Biometric Identifiers)를 추출하거나 보관하지 않습니다</li>
+        <li><strong>기기 내 사진 보정:</strong> 얼굴·몸매 보정은 기기에서 얼굴 특징점·윤곽과 자세 정보를 분석해 이미지를 조정합니다. 데잇은 이 정보를 사진 편집에 사용하며, 개인의 신원을 알아내거나 계정에 로그인하는 인증 수단으로 사용하지 않습니다. 별도로 요청한 클라우드 AI 기능은 선택한 사진을 제6·7항의 공급자에게 전송하며, 공급자의 처리·보관 범위는 기기 내 보정과 별개입니다</li>
         <li>비로그인 이용자는 Supabase Auth 익명 UUID를 사용하고, 로그인은 이용자가 선택한 Google·Apple 계정 정보만 최소 수집</li>
         <li>정확한 위치 좌표는 서버에 저장하지 않고 날씨 조회 후 즉시 폐기</li>
         <li>좌표 없는 위치 이용 사실 확인자료를 자동 기록하고 6개월 보관 후 파기</li>
@@ -623,7 +623,7 @@
           <tr>
             <td>Wardrobe garment analysis: the clothing or accessory photo you choose, a photo hash, and the analyzed item attributes</td>
             <td>Extracting category, color, silhouette, and design attributes for wardrobe registration</td>
-            <td>Sent to OpenRouter (Qwen model API) after photo-transfer consent when you request an analysis. Dait does not store the original photo on its servers; analyzed attributes are kept for up to 30 days and then deleted (on-device wardrobe originals and cutouts stay on this device only)</td>
+            <td>Sent to OpenRouter (Qwen model API) after photo-transfer consent when you request an analysis. Dait does not store the original photo on its servers; the server analysis cache expires after 30 days and is deleted through cleanup (see Section 4). Wardrobe originals, cutouts and garment details on this device remain until you delete them</td>
           </tr>
           <tr>
             <td>Photo Library access and the Dait Wallpapers and Dait watch photo albums</td>
@@ -689,7 +689,7 @@
         <li>Dait Wallpapers and Dait watch photos are stored in the on-device photo library and are never deleted automatically by the App. You can revoke Photos access or delete the images or albums directly.</li>
         <li>Fashion try-on: Dait handles input photos in server memory during generation and does not retain them as part of that process. Separately submitted support copies follow the additional support notice above. Server results are blocked after 7 days and removed by a cleanup job. Results saved in the App or Photos stay on the device until you delete them. Usage and billing records, kept apart from photos, are retained until one day after the relevant billing period ends.</li>
         <li>Outfit weather coach: Dait does not store the original photo, and analyzed clothing attributes are deleted after 7 days. Deleting your account also deletes related records.</li>
-        <li>Wardrobe garment analysis: Dait does not store the original photo on its servers, and analyzed clothing attributes are deleted after 30 days. Deleting your account also deletes on-device wardrobe items and server analysis records.</li>
+        <li>Wardrobe garment analysis: Dait does not store the original photo on its servers. Server analysis caches and request records expire or become eligible for deletion after 30 days; expired caches are not reused. Cleanup runs on an hourly schedule and during subsequent requests, so actual deletion may be delayed by scheduler availability and server responses. On-device wardrobe photos, cutouts and garment details remain until you delete them. Account deletion also marks on-device wardrobe items and server analysis records for deletion.</li>
         <li>Meta Muse fashion try-on uses Standard Services. Meta states that it does not use this content to train Meta models, but may process and retain it to provide services, comply with law, and review safety, security, abuse and policy violations. Provider retention is separate from Dait's input and 7-day result policies. See <a href="https://dev.meta.ai/legal/commitments">Meta's data commitments</a> and <a href="https://dev.meta.ai/legal/terms-of-service">service terms</a>.</li>
         <li>Processing and retention by Google for the outfit weather coach follow Google's terms. The paid Gemini API states that inputs and outputs are not used to improve models, but they may be logged for a limited period for safety and abuse detection.</li>
         <li>Wardrobe garment analysis requests via OpenRouter are sent with data collection and model training disabled (`data_collection: deny`). Safety, abuse-prevention logging, and retention by OpenRouter and its inference infrastructure follow the <a href="https://openrouter.ai/privacy">OpenRouter Privacy Policy</a>.</li>
@@ -800,7 +800,7 @@
           <tr>
             <td>OpenRouter, Inc. and inference infrastructure providers<br>United States and service operation countries<br>Contact: privacy@openrouter.ai (<a href="https://openrouter.ai/privacy">Privacy Policy</a>)</td>
             <td>Your selected clothing or accessory photo and analysis instructions after separate consent / wardrobe garment attribute analysis (Qwen model)</td>
-            <td>Encrypted transfer upon analysis request (`data_collection: deny`) / Dait does not retain the original photo and deletes analyzed attributes after 30 days; provider processing follows the <a href="https://openrouter.ai/privacy">OpenRouter policy</a></td>
+            <td>Encrypted transfer upon analysis request (`data_collection: deny`) / Dait does not retain the original photo; its server analysis cache expires after 30 days and is deleted through cleanup (see Section 4). Provider processing follows the <a href="https://openrouter.ai/privacy">OpenRouter policy</a></td>
           </tr>
           <tr>
             <td>Apple Inc.<br>United States and countries where Apple operates its services<br>Contact: apple.com/legal/privacy/contact</td>
@@ -836,13 +836,13 @@
     </div>
 
     <div class="section">
-      <h2><span class="num">9</span> Data Security and No Biometric Identifier Extraction</h2>
+      <h2><span class="num">9</span> Data Security and On-Device Photo Retouching</h2>
       <p>We implement the following measures to ensure the security of your personal information:</p>
       <ul>
         <li>HTTPS (TLS) encryption for all data transmissions</li>
         <li>Supabase Row Level Security (RLS) policies for data access control</li>
         <li>Fashion try-on results are delivered only to their owner from private file storage using expiring signed URLs</li>
-        <li><strong>No Biometric Identifiers:</strong> When processing photos for AI fashion try-on, wardrobe analysis, or the outfit weather coach, Dait does not extract, collect, or store facial geometry scans, biometric templates, voiceprints, or other biometric identifiers (as defined under laws such as the Illinois Biometric Information Privacy Act or Texas CUBI) to identify any individual</li>
+        <li><strong>On-device photo retouching:</strong> Face and body retouching analyzes facial landmarks, contours and pose on your device to adjust the image. Dait uses these measurements for photo editing, not to recognize your identity or authenticate an account. Separately requested cloud AI features send selected photos to the providers in Sections 6 and 7; provider processing and retention are separate from on-device retouching</li>
         <li>Guest access through anonymous Supabase Auth UUIDs, with only the Google or Apple account information selected by the user collected for optional sign-in</li>
         <li>Exact coordinates are not stored on servers and are discarded immediately after weather retrieval</li>
         <li>Coordinate-free location-use confirmation records are automatically recorded and deleted after six months</li>
